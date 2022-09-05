@@ -10,7 +10,7 @@
     <li class="nav-item ml-2">
       <img src="{{asset('lte/dist/img/LogoInstiki.png')}}" width="150" alt="">
     </li>
-    <li class="nav-item ml-2">
+    <li class="nav-item ml-2 d-none d-lg-block">
       <img src="{{asset('lte/dist/img/LogoWebsite.png')}}" width="90" alt="">
     </li>
   </ul>

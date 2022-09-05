@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="card">
+                <div class="card" style="background-color: rgba(245, 245, 245, 0.8);">
                     <div class="card-header">
                         Kelola Data Tarian
                     </div>
@@ -230,7 +230,9 @@
 </section>
 
 <script type="text/javascript">
-    // script js disini
+    $(document).ready(function() {
+        $(".yearpicker").yearpicker();
+    });
 </script>
 <!-- /.content-wrapper -->
 @endsection

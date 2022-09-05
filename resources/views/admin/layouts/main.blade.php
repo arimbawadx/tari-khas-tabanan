@@ -23,12 +23,14 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="{{ asset('lte/plugins/bootstrap/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('lte/plugins/bootstrap/font/bootstrap-icons.css') }}">
-  <link rel="stylesheet" href="{{ asset('lte/plugins/yearpicker/yearpicker.css') }}">
   <!-- REQUIRED SCRIPTS -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="{{ asset('lte/plugins/jquery/jquery.min.js') }}"></script>
   <script src="{{ asset('lte/plugins/popper/popper.min.js') }}"></script>
   <script src="{{ asset('lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <!-- jqueri UI CSS-->
+  <!-- <link rel="stylesheet" href="{{ asset('lte/plugins/jquery-ui/jquery-ui.min.css') }}"> -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
   <!-- overlayScrollbars -->
   <script src="{{ asset('lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
   <!-- AdminLTE App -->
@@ -41,12 +43,29 @@
   <!-- Select2 -->
   <link rel="stylesheet" href="{{ asset('lte/plugins/select2/css/select2.css')}}">
   <link rel="stylesheet" href="{{ asset('lte/plugins/select2/css//select2-bootstrap4.min.css')}}">
+
+
   <script src="{{ asset('lte/plugins/select2/js/select2.js') }}"></script>
   <!-- ChartJS -->
   <script src="{{ asset('lte/plugins/chart.js/Chart.min.js') }}"></script>
   <!-- Sweet Alert 2-->
   <script src="{{ asset('lte/plugins/sweetalert2/sweetalert2.all.js') }}"></script>
+  <!-- YearPicker -->
+  <link rel="stylesheet" href="{{ asset('lte/plugins/yearpicker/yearpicker.css') }}">
   <script src="{{ asset('lte/plugins/yearpicker/yearpicker.js') }}" async></script>
+  <!-- Leaflet Map -->
+  <!-- <link rel="stylesheet" href="{{ asset('lte/plugins/leaflet/leaflet.css') }}">
+  <script src="{{ asset('lte/plugins/leaflet/leaflet.js') }}"></script> -->
+  <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script> -->
+  <!-- End Leaflet Map -->
+
+  <!-- gmaplibrabry -->
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=place"></script> -->
+
+  <!-- jqueri UI -->
+  <script type="text/javascript" src="{{ asset('lte/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+
   <!-- Loader CSS https://loading.io/asset/445230 -->
   <style type="text/css">
     div#preloader {
@@ -70,10 +89,15 @@
     }
 
     .content-wrapper {
-      background-image: url("{{asset('lte/dist/img/background_opc2.jpg')}}");
+      background-image: url("{{asset('lte/dist/img/background_opc2.jpg')}}") !important;
       background-size: 100% 100%;
+      background-position: center;
       background-repeat: no-repeat;
     }
+
+    /* .ui-front {
+      z-index: 9999999 !important;
+    } */
   </style>
   <script type="text/javascript">
     // loader
@@ -180,50 +204,85 @@
     }
   </script>
 
-  <!--spesial thun baru-->
-  <script src="{{asset('lte/plugins/fireworks/fireworks.js')}}"></script>
+  <!--     // get lat lng by address -->
   <script>
-    // const container = document.querySelector('.fireworks-container')
+    // $("#alamat_sanggar").click(function() {
+    //   var datass = [
+    //     "ActionScript",
+    //     "AppleScript",
+    //     "ASP",
+    //     "BASIC",
+    //     "C",
+    //     "C++",
+    //     "Clojure",
+    //     "COBOL",
+    //     "ColdFusion",
+    //     "Erlang",
+    //     "Fortran",
+    //     "Groovy",
+    //     "Haskell",
+    //     "Java",
+    //     "JavaScript",
+    //     "Lisp",
+    //     "Perl",
+    //     "PHP",
+    //     "Python",
+    //     "Ruby",
+    //     "Scala",
+    //     "Scheme"
+    //   ];
+    //   var alamat = $('#alamat_sanggar').val();
+    //   $.ajax({
+    //     type: "GET",
+    //     url: "https://nominatim.openstreetmap.org/search?q=" + alamat + "&format=json",
+    //     // beforeSend: function() {
+    //     //   $("#search-box").css("background", "#FFF url(LoaderIcon.gif) no-repeat 165px");
+    //     // },
+    //     success: function(data) {
 
-    // const fireworks = new Fireworks({
-    //   target: container,
-    //   hue: 120,
-    //   startDelay: 1,
-    //   minDelay: 20,
-    //   maxDelay: 30,
-    //   speed: 4,
-    //   acceleration: 1.05,
-    //   friction: 0.98,
-    //   gravity: 1,
-    //   particles: 75,
-    //   trace: 3,
-    //   explosion: 5,
-    //   boundaries: {
-    //     top: 50,
-    //     bottom: container.clientHeight,
-    //     left: 50,
-    //     right: container.clientWidth
-    //   },
-    //   sound: {
-    //     enable: false,
-    //     list: [
-    //     'explosion0.mp3',
-    //     'explosion1.mp3',
-    //     'explosion2.mp3'
-    //     ],
-    //     min: 4,
-    //     max: 8
-    //   }
-    // })
+    //       console.log(data)
 
-    // start fireworks
-    // fireworks.start()
+    //       $("#alamat_sanggar").autocomplete({
+    //         source: data.map(lang => lang.display_name)
+    //       });
+    //     }
+    //   });
+
+    //   $('#alamat_sanggar').on('autocompletechange change', function() {
+    //     $('#lat').val(this.value);
+    //   }).change();
+    // });
+    // get lat lng by address
+
+
+    // var map = L.map('map').setView([-8.55162, 115.369], 15);
+
+    // var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //   maxZoom: 19,
+    //   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    // }).addTo(map);
+
+    // var marker = L.marker([-8.55162, 115.369]).addTo(map)
+    //   .bindPopup('<b>Hello world!</b><br />I am a popup.').openPopup();
+
+
+    // // var popup = L.popup()
+    // //   .setLatLng([-8.5430894, 115.3213101])
+    // //   .setContent('I am a standalone popup.')
+    // //   .openOn(map);
+
+    // function onMapClick(e) {
+    //   popup
+    //     .setLatLng(e.latlng)
+    //     .setContent('You clicked the map at ' + e.latlng.toString())
+    //     .openOn(map);
+    // }
+
+    // map.on('click', onMapClick);
   </script>
-  <!--spesial thun baru-->
 
   <script type="text/javascript">
     $(document).ready(function() {
-      $(".yearpicker").yearpicker();
 
       $(".modalTambah").on("hidden.bs.modal", function() {
         $(this).find('form').trigger('reset');

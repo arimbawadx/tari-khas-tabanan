@@ -39,10 +39,40 @@
                                 <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed cumque accusantium libero est distinctio dolore soluta voluptate non facilis porro magni ducimus quia hic qui fugit, labore magnam itaque exercitationem!</td>
                             </tr>
                         </table>
+
+                        <div class="row ">
+                            <div class="col-lg-12">
+                                <div id="map" style="width: 100%; height: 400px;"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
+<?php
+$kordinat = "-8.55162, 115.369"; ?>
+<script>
+    var kordinat = [<?= $kordinat ?>];
+    console.log(kordinat);
+    // lefleat
+    var map = L.map('map').setView(kordinat, 15);
+
+    var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    var marker = L.marker(kordinat).addTo(map)
+        .bindPopup('<b>Sanggar Tari Putra Ayu</b>').openPopup();
+
+    function onMapClick(e) {
+        if (confirm('Buka dengan Google Maps?')) {
+            window.open('https://maps.google.com/?q=-8.55162, 115.369', '_blank');
+        }
+    }
+    marker.on('click', onMapClick);
+    // EndLelfeat
+</script>
 @endsection

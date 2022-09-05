@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="card">
+                <div class="card" style="background-color: rgba(245, 245, 245, 0.8);">
                     <div class="card-header">
                         Kelola Data Sanggar
                     </div>
@@ -52,7 +52,11 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="alamat_sanggar">Alamat </label>
-                                                    <input autocomplete="off" type="text" class="form-control @error('alamat_sanggar') is-invalid @enderror" id="alamat_sanggar" name="alamat_sanggar" placeholder="Masukan Alamat Sanggar">
+                                                    <input autocomplete="off" type="text" class="form-control @error('alamat_sanggar') is-invalid @enderror alamat_sanggar" id="alamat_sanggar" name="alamat_sanggar" placeholder="Masukan Alamat Sanggar">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="titik_kordinat">Titik Kordinat</label>
+                                                    <input autocomplete="off" type="text" class="form-control @error('titik_kordinat') is-invalid @enderror titik_kordinat" id="titik_kordinat" name="titik_kordinat" placeholder="Masukan Latitude dan Longititude">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="deskripsi_sanggar">Deskripsi</label>
@@ -72,29 +76,15 @@
                                 <table class="table datatables table-hover table-bordered table-striped">
                                     <thead class="text-center">
                                         <tr>
-                                            <th>ID Sanggar</th>
+                                            <th class="w-auto">ID Sanggar</th>
                                             <th>Nama Sanggar</th>
                                             <th>Pemilik</th>
                                             <th>ALamat</th>
-                                            <th>Deskripsi</th>
-                                            <th width="150px">Aksi</th>
+                                            <th class="th-lg">Deskripsi</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Sanggar Putra Ayu</td>
-                                            <td>I Nyoman Purna</td>
-                                            <td>Desa Kukuh, Marga</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, iusto eos minus totam ab recusandae laudantium quisquam incidunt! Totam officiis animi aperiam ex quidem quia deserunt dignissimos tenetur perferendis dolore cupiditate vel cum pariatur officia eos, earum possimus sit molestias.</td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataSanggar1">
-                                                    <i class="fa fa-pen"></i><span></span>
-                                                </button>
-                                                <button sanggar-id="1" nama-sanggar="test" class="btn btn-danger delete_sanggar">
-                                                    <i class="fa fa-trash"></i><span></span>
-                                                </button>
-                                            </td>
-                                        </tr>
                                         <tr>
                                             <td>1</td>
                                             <td>Sanggar Putra Ayu</td>

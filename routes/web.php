@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authController;
-
+use App\Http\Controllers\videoAdminController;
 
 // ==========================================================Authentication============================================================
 Route::get('/login', function () {
@@ -27,6 +27,13 @@ Route::get('/admin/kategori-tari', function () {
 });
 Route::get('/admin/tarian', function () {
 	return view('admin.pages.DataTarian');
+});
+Route::get('/admin/video', function () {
+	return view('admin.pages.DataVideo');
+});
+Route::post('/admin/upload-video', [videoAdminController::class, 'store']);
+Route::get('/admin/foto', function () {
+	return view('admin.pages.DataFoto');
 });
 // =============================================================End Admin=======================================================
 
