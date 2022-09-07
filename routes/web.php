@@ -19,6 +19,9 @@ Route::get('/blank', function () {
 Route::get('/admin/dashboard', function () {
 	return view('admin.pages.Dashboard');
 });
+Route::get('/admin/data-user', function () {
+	return view('admin.pages.DataUser');
+});
 Route::get('/admin/data-sanggar', function () {
 	return view('admin.pages.DataSanggar');
 });
