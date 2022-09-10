@@ -75,7 +75,8 @@
                                 <table class="table datatables table-hover table-bordered table-striped">
                                     <thead class="text-center">
                                         <tr>
-                                            <th>No</th>
+                                            <th>ID Video</th>
+                                            <th>ID Tarian</th>
                                             <th>Judul Video</th>
                                             <th>Sumber</th>
                                             <th>File</th>
@@ -85,6 +86,7 @@
                                     <tbody>
                                         <tr>
                                             <td>1</td>
+                                            <td>6</td>
                                             <td>Tari Kidang Kencana</td>
                                             <td>Youtube Ngetis Picture</td>
                                             <td class="text-center">

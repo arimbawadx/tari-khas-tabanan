@@ -36,7 +36,7 @@
     </li> -->
     <li class="nav-item dropdown no-arrow">
       <a class="nav-link dropdown-toggle" href="#" id="profil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <img class="rounded-circle" width="30" src="{{asset('lte/dist/img/noprofil.jpg')}}"> <span> <strong>Admin</strong></span>
+        <img class="rounded-circle" width="30" src="{{asset('lte/dist/img/noprofil.jpg')}}"> <span> <strong>{{session()->get('dataLoginAdmin')['nama_user']}}</strong></span>
       </a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profil">
         <a class="dropdown-item logout" href="#"> Logout </a>

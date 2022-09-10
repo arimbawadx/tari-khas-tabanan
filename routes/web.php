@@ -2,7 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authController;
+use App\Http\Controllers\dashboardAdminController;
+use App\Http\Controllers\sanggarAdminController;
+use App\Http\Controllers\userAdminController;
 use App\Http\Controllers\videoAdminController;
+
+// test
+// Route::get('/blank', function () {
+// 	return view('admin.pages.blank');
+// });
 
 // ==========================================================Authentication============================================================
 Route::get('/login', function () {
@@ -10,33 +18,39 @@ Route::get('/login', function () {
 });
 Route::post('login-check', [authController::class, 'loginCheck']);
 Route::get('/logout', [authController::class, 'logout']);
-// ===========================================================End Authentication=========================================================
+// ===========================================================End Authentication=====================================================
+
 
 // =============================================================Admin=======================================================
-Route::get('/blank', function () {
-	return view('admin.pages.blank');
-});
-Route::get('/admin/dashboard', function () {
-	return view('admin.pages.Dashboard');
-});
-Route::get('/admin/data-user', function () {
-	return view('admin.pages.DataUser');
-});
-Route::get('/admin/data-sanggar', function () {
-	return view('admin.pages.DataSanggar');
-});
-Route::get('/admin/kategori-tari', function () {
-	return view('admin.pages.DataKategoriTari');
-});
-Route::get('/admin/tarian', function () {
-	return view('admin.pages.DataTarian');
-});
-Route::get('/admin/video', function () {
-	return view('admin.pages.DataVideo');
-});
-Route::post('/admin/upload-video', [videoAdminController::class, 'store']);
-Route::get('/admin/foto', function () {
-	return view('admin.pages.DataFoto');
+Route::middleware(['SessionAdmin'])->group(function () {
+	// --------------------------------------------------/data user-----------------------------------------------------------------
+	Route::get('/admin/data-user', [userAdminController::class, 'index']);
+	Route::post('/admin/data-user', [userAdminController::class, 'store']);
+	Route::post('/admin/data-user/{id}', [userAdminController::class, 'update']);
+	Route::get('/admin/data-user/{id}', [userAdminController::class, 'destroy']);
+	// --------------------------------------------------/dashboard-----------------------------------------------------------------
+	Route::get('/admin/dashboard', [dashboardAdminController::class, 'index']);
+
+	// --------------------------------------------------/data sanggar-----------------------------------------------------------------
+	Route::get('/admin/data-sanggar', [sanggarAdminController::class, 'index']);
+	Route::post('/admin/data-sanggar', [sanggarAdminController::class, 'store']);
+	Route::post('/admin/data-sanggar/{id}', [sanggarAdminController::class, 'update']);
+	Route::get('/admin/data-sanggar/{id}', [sanggarAdminController::class, 'destroy']);
+	// --------------------------------------------------/done-----------------------------------------------------------------
+
+	Route::get('/admin/kategori-tari', function () {
+		return view('admin.pages.DataKategoriTari');
+	});
+	Route::get('/admin/tarian', function () {
+		return view('admin.pages.DataTarian');
+	});
+	Route::get('/admin/video', function () {
+		return view('admin.pages.DataVideo');
+	});
+	Route::post('/admin/upload-video', [videoAdminController::class, 'store']);
+	Route::get('/admin/foto', function () {
+		return view('admin.pages.DataFoto');
+	});
 });
 // =============================================================End Admin=======================================================
 

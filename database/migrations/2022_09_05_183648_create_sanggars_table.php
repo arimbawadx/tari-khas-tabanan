@@ -17,7 +17,9 @@ class CreateSanggarsTable extends Migration
             $table->id();
             // $table->unsignedBigInteger('users_id')->index('sanggars_users_id_foreign'); masih ??
             $table->string('nama_sanggar');
+            $table->string('pemilik');
             $table->string('alamat');
+            $table->string('titik_kordinat');
             $table->string('deskripsi');
             $table->timestamps();
         });

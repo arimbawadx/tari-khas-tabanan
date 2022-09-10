@@ -102,7 +102,8 @@
                                 <table class="table datatables table-hover table-bordered table-striped">
                                     <thead class="text-center">
                                         <tr>
-                                            <th>No</th>
+                                            <th>ID Tari</th>
+                                            <th>ID Kategori</th>
                                             <th>Nama Tarian</th>
                                             <th>Pencipta</th>
                                             <th>Tahun Cipta</th>
@@ -115,6 +116,7 @@
                                     <tbody>
                                         <tr>
                                             <td>1</td>
+                                            <td>5</td>
                                             <td>Tari Bungan Sandat</td>
                                             <td>I Nyoman Purna</td>
                                             <td>1999</td>
@@ -132,6 +134,7 @@
 
                                         <tr>
                                             <td>1</td>
+                                            <td>5</td>
                                             <td>Tari Bungan Sandat</td>
                                             <td>I Nyoman Purna</td>
                                             <td>1999</td>

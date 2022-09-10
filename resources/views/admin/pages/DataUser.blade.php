@@ -1,8 +1,8 @@
 @extends('admin/layouts/main')
 
-@section('title','Data User')
+@section('title','Data Admin ')
 
-@section('content-header', 'Data User')
+@section('content-header', 'Data Admin')
 
 @section('content')
 <!-- Content Wrapper. Contains page content -->
@@ -12,7 +12,7 @@
             <div class="col-12">
                 <div class="card" style="background-color: rgba(245, 245, 245, 0.8);">
                     <div class="card-header">
-                        Kelola Data User
+                        Kelola Data Admin
                     </div>
 
                     <div class="card-body">
@@ -32,19 +32,19 @@
 
                                         <!-- Modal Header -->
                                         <div class="modal-header">
-                                            <h4 class="modal-title">Form Tambah Data User <br>
-                                                <p class="text-sm">Kelola Tambah Data User</p>
+                                            <h4 class="modal-title">Form Tambah Data Admin <br>
+                                                <p class="text-sm">Kelola Tambah Data Admin</p>
                                             </h4>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
 
                                         <!-- Modal body -->
                                         <div class="modal-body">
-                                            <form method="post" action="#">
+                                            <form method="post" action="/admin/data-user">
                                                 {{csrf_field()}}
                                                 <div class="form-group">
                                                     <label for="nama_user">Nama</label>
-                                                    <input autocomplete="off" type="text" class="form-control @error('nama_user') is-invalid @enderror" id="nama_user" name="nama_user" placeholder="Masukan nama">
+                                                    <input required autocomplete="off" type="text" class="form-control @error('nama_user') is-invalid @enderror" id="nama_user" name="nama_user" placeholder="Masukan nama">
                                                 </div>
 
                                                 <button type="button" class="btn btn-secondary float-right ml-1" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Kembali</button>
@@ -58,48 +58,50 @@
                         <div class="row">
                             <div class="col-12 table-responsive">
                                 <table class="table datatables table-hover table-bordered table-striped">
-                                    <thead class="text-center">
+                                    <thead>
                                         <tr>
-                                            <th>No</th>
+                                            <th>ID User</th>
                                             <th>Nama</th>
                                             <th>Username</th>
-                                            <th width="150px">Aksi</th>
+                                            <th class="text-center" width="150px">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach($users as $i => $user)
                                         <tr>
-                                            <td>1</td>
-                                            <td>Nyoman Purna</td>
-                                            <td>USER18101009</td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataKategori1">
+                                            <!-- <td>{{$i+1}}</td> -->
+                                            <td>{{$user->id}}</td>
+                                            <td>{{$user->nama_user}}</td>
+                                            <td>{{$user->username}}</td>
+                                            <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataKategori{{$user->id}}">
                                                     <i class="fa fa-pen"></i><span></span>
                                                 </button>
-                                                <button kategori-id="1" nama-kategori="test" class="btn btn-danger delete_kategori">
+                                                <button user-id="{{$user->id}}" nama-user="{{$user->nama_user}}" class="btn btn-danger delete_user">
                                                     <i class="fa fa-trash"></i><span></span>
                                                 </button>
                                             </td>
                                         </tr>
 
                                         <!-- The Modal Ubah data User-->
-                                        <div class="modal" id="myModalUbahDataKategori1">
+                                        <div class="modal" id="myModalUbahDataKategori{{$user->id}}">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
 
                                                     <!-- Modal Header -->
                                                     <div class="modal-header">
-                                                        <h4 class="modal-title">Form Ubah Data User <br>
-                                                            <p class="text-sm">Kelola Ubah Data User</p>
+                                                        <h4 class="modal-title">Form Ubah Data Admin <br>
+                                                            <p class="text-sm">Kelola Ubah Data Admin</p>
                                                         </h4>
                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                     </div>
 
                                                     <!-- Modal body -->
                                                     <div class="modal-body">
-                                                        <form method="post" action="#">
+                                                        <form method="post" action="/admin/data-user/{{$user->id}}">
                                                             {{csrf_field()}}
                                                             <div class="form-group">
                                                                 <label for="nama_user">Nama</label>
-                                                                <input autocomplete="off" type="text" class="form-control @error('nama_user') is-invalid @enderror" id="nama_user" name="nama_user" value="nama">
+                                                                <input required autocomplete="off" type="text" class="form-control @error('nama_user') is-invalid @enderror" id="nama_user" name="nama_user" value="{{$user->nama_user}}">
                                                             </div>
 
                                                             <button type="button" class="btn btn-secondary float-right ml-1" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Kembali</button>
@@ -109,6 +111,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -121,7 +124,30 @@
 </section>
 
 <script type="text/javascript">
-    // script js disini
+    $(document).ready(function() {
+        // delete user
+        $('.delete_user').click(function() {
+            var user_id = $(this).attr('user-id');
+            var nama_user = $(this).attr('nama-user');
+
+            Swal.fire({
+                title: "Yakin hapus " + nama_user + " ?",
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'Hapus',
+                denyButtonText: `Batal`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    window.location = "/admin/data-user/" + user_id;
+                    Swal.fire('Data terhapus!', '', 'success')
+                } else if (result.isDenied) {
+                    Swal.fire('Jangan Ragu!', '', 'warning')
+                }
+            })
+        });
+        // end delete user
+    });
 </script>
 <!-- /.content-wrapper -->
 @endsection

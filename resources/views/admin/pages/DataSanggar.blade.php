@@ -40,27 +40,27 @@
 
                                         <!-- Modal body -->
                                         <div class="modal-body">
-                                            <form method="post" action="#">
+                                            <form method="post" action="/admin/data-sanggar">
                                                 {{csrf_field()}}
                                                 <div class="form-group">
                                                     <label for="nama_sanggar">Nama Sanggar</label>
-                                                    <input autocomplete="off" type="text" class="form-control @error('nama_sanggar') is-invalid @enderror" id="nama_sanggar" name="nama_sanggar" placeholder="Masukan Nama Sanggar">
+                                                    <input required autocomplete="off" type="text" class="form-control @error('nama_sanggar') is-invalid @enderror" id="nama_sanggar" name="nama_sanggar" placeholder="Masukan Nama Sanggar">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="pemilik_sanggar">Pemilik</label>
-                                                    <input autocomplete="off" type="text" class="form-control @error('pemilik_sanggar') is-invalid @enderror" id="pemilik_sanggar" name="pemilik_sanggar" placeholder="Masukan Pemilik Sanggar">
+                                                    <input required autocomplete="off" type="text" class="form-control @error('pemilik_sanggar') is-invalid @enderror" id="pemilik_sanggar" name="pemilik_sanggar" placeholder="Masukan Pemilik Sanggar">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="alamat_sanggar">Alamat </label>
-                                                    <input autocomplete="off" type="text" class="form-control @error('alamat_sanggar') is-invalid @enderror alamat_sanggar" id="alamat_sanggar" name="alamat_sanggar" placeholder="Masukan Alamat Sanggar">
+                                                    <input required autocomplete="off" type="text" class="form-control @error('alamat_sanggar') is-invalid @enderror alamat_sanggar" id="alamat_sanggar" name="alamat_sanggar" placeholder="Masukan Alamat Sanggar">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="titik_kordinat">Titik Kordinat</label>
-                                                    <input autocomplete="off" type="text" class="form-control @error('titik_kordinat') is-invalid @enderror titik_kordinat" id="titik_kordinat" name="titik_kordinat" placeholder="Masukan Latitude dan Longititude">
+                                                    <input required autocomplete="off" type="text" class="form-control @error('titik_kordinat') is-invalid @enderror titik_kordinat" id="titik_kordinat" name="titik_kordinat" placeholder="Masukan Latitude dan Longititude">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="deskripsi_sanggar">Deskripsi</label>
-                                                    <input autocomplete="off" type="text" class="form-control @error('deskripsi_sanggar') is-invalid @enderror" id="deskripsi_sanggar" name="deskripsi_sanggar" placeholder="Masukan Deskripsi Sanggar">
+                                                    <input required autocomplete="off" type="text" class="form-control @error('deskripsi_sanggar') is-invalid @enderror" id="deskripsi_sanggar" name="deskripsi_sanggar" placeholder="Masukan Deskripsi Sanggar">
                                                 </div>
 
                                                 <button type="button" class="btn btn-secondary float-right ml-1" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Kembali</button>
@@ -80,28 +80,31 @@
                                             <th>Nama Sanggar</th>
                                             <th>Pemilik</th>
                                             <th>ALamat</th>
+                                            <th>Titik Kordinat</th>
                                             <th class="th-lg">Deskripsi</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach($data as $i => $d)
                                         <tr>
-                                            <td>1</td>
-                                            <td>Sanggar Putra Ayu</td>
-                                            <td>I Nyoman Purna</td>
-                                            <td>Desa Kukuh, Marga</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, iusto eos minus totam ab recusandae laudantium quisquam incidunt! Totam officiis animi aperiam ex quidem quia deserunt dignissimos tenetur perferendis dolore cupiditate vel cum pariatur officia eos, earum possimus sit molestias.</td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataSanggar1">
+                                            <td>{{$d->id}}</td>
+                                            <td>{{$d->nama_sanggar}}</td>
+                                            <td>{{$d->pemilik}}</td>
+                                            <td>{{$d->alamat}}</td>
+                                            <td>{{$d->titik_kordinat}}</td>
+                                            <td>{{$d->deskripsi}}</td>
+                                            <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataSanggar{{$d->id}}">
                                                     <i class="fa fa-pen"></i><span></span>
                                                 </button>
-                                                <button sanggar-id="1" nama-sanggar="test" class="btn btn-danger delete_sanggar">
+                                                <button sanggar-id="{{$d->id}}" nama-sanggar="{{$d->nama_sanggar}}" class="btn btn-danger delete_sanggar">
                                                     <i class="fa fa-trash"></i><span></span>
                                                 </button>
                                             </td>
                                         </tr>
 
                                         <!-- The Modal Ubah data sanggar-->
-                                        <div class="modal" id="myModalUbahDataSanggar1">
+                                        <div class="modal" id="myModalUbahDataSanggar{{$d->id}}">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
 
@@ -115,23 +118,27 @@
 
                                                     <!-- Modal body -->
                                                     <div class="modal-body">
-                                                        <form method="post" action="#">
+                                                        <form method="post" action="/admin/data-sanggar/{{$d->id}}">
                                                             {{csrf_field()}}
                                                             <div class="form-group">
                                                                 <label for="nama_sanggar">Nama Sanggar</label>
-                                                                <input autocomplete="off" type="text" class="form-control @error('nama_sanggar') is-invalid @enderror" id="nama_sanggar" name="nama_sanggar" value="nama">
+                                                                <input required autocomplete="off" type="text" class="form-control @error('nama_sanggar') is-invalid @enderror" id="nama_sanggar" name="nama_sanggar" value="{{$d->nama_sanggar}}">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="pemilik_sanggar">Pemilik</label>
-                                                                <input autocomplete="off" type="text" class="form-control @error('pemilik_sanggar') is-invalid @enderror" id="pemilik_sanggar" name="pemilik_sanggar" value="Pemilik">
+                                                                <input required autocomplete="off" type="text" class="form-control @error('pemilik_sanggar') is-invalid @enderror" id="pemilik_sanggar" name="pemilik_sanggar" value="{{$d->pemilik}}">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="alamat_sanggar">Alamat </label>
-                                                                <input autocomplete="off" type="text" class="form-control @error('alamat_sanggar') is-invalid @enderror" id="alamat_sanggar" name="alamat_sanggar" value="alamat">
+                                                                <input required autocomplete="off" type="text" class="form-control @error('alamat_sanggar') is-invalid @enderror" id="alamat_sanggar" name="alamat_sanggar" value="{{$d->alamat}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="titik_kordinat">Titik Kordinat</label>
+                                                                <input required autocomplete="off" type="text" class="form-control @error('titik_kordinat') is-invalid @enderror titik_kordinat" id="titik_kordinat" name="titik_kordinat" value="{{$d->titik_kordinat}}">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="deskripsi_sanggar">Deskripsi</label>
-                                                                <input autocomplete="off" type="text" class="form-control @error('deskripsi_sanggar') is-invalid @enderror" id="deskripsi_sanggar" name="deskripsi_sanggar" value="Deskripsi">
+                                                                <input required autocomplete="off" type="text" class="form-control @error('deskripsi_sanggar') is-invalid @enderror" id="deskripsi_sanggar" name="deskripsi_sanggar" value="{{$d->deskripsi}}">
                                                             </div>
 
                                                             <button type="button" class="btn btn-secondary float-right ml-1" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Kembali</button>
@@ -141,6 +148,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -153,7 +161,30 @@
 </section>
 
 <script type="text/javascript">
-    // script js disini
+    $(document).ready(function() {
+        // delete sanggar
+        $('.delete_sanggar').click(function() {
+            var sanggar_id = $(this).attr('sanggar-id');
+            var nama_sanggar = $(this).attr('nama-sanggar');
+
+            Swal.fire({
+                title: "Yakin hapus " + nama_sanggar + " ?",
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'Hapus',
+                denyButtonText: `Batal`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    window.location = "/admin/data-sanggar/" + sanggar_id;
+                    Swal.fire('Data terhapus!', '', 'success')
+                } else if (result.isDenied) {
+                    Swal.fire('Jangan Ragu!', '', 'warning')
+                }
+            })
+        });
+        // end delete sanggar
+    });
 </script>
 <!-- /.content-wrapper -->
 @endsection
