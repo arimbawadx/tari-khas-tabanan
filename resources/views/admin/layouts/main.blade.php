@@ -50,9 +50,6 @@
   <script src="{{ asset('lte/plugins/chart.js/Chart.min.js') }}"></script>
   <!-- Sweet Alert 2-->
   <script src="{{ asset('lte/plugins/sweetalert2/sweetalert2.all.js') }}"></script>
-  <!-- YearPicker -->
-  <link rel="stylesheet" href="{{ asset('lte/plugins/yearpicker/yearpicker.css') }}">
-  <script src="{{ asset('lte/plugins/yearpicker/yearpicker.js') }}" async></script>
   <!-- Leaflet Map -->
   <!-- <link rel="stylesheet" href="{{ asset('lte/plugins/leaflet/leaflet.css') }}">
   <script src="{{ asset('lte/plugins/leaflet/leaflet.js') }}"></script> -->
@@ -65,6 +62,10 @@
 
   <!-- jqueri UI -->
   <script type="text/javascript" src="{{ asset('lte/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+
+  <!-- YearPicker -->
+  <link rel="stylesheet" href="{{ asset('lte/plugins/yearpicker/yearpicker.css') }}">
+  <script src="{{ asset('lte/plugins/yearpicker/yearpicker.js') }}" async></script>
 
   <!-- Loader CSS https://loading.io/asset/445230 -->
   <style type="text/css">

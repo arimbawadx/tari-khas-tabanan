@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\dashboardAdminController;
+use App\Http\Controllers\kategoriAdminController;
 use App\Http\Controllers\sanggarAdminController;
+use App\Http\Controllers\tarianAdminController;
 use App\Http\Controllers\userAdminController;
 use App\Http\Controllers\videoAdminController;
 
@@ -36,14 +38,21 @@ Route::middleware(['SessionAdmin'])->group(function () {
 	Route::post('/admin/data-sanggar', [sanggarAdminController::class, 'store']);
 	Route::post('/admin/data-sanggar/{id}', [sanggarAdminController::class, 'update']);
 	Route::get('/admin/data-sanggar/{id}', [sanggarAdminController::class, 'destroy']);
+
+	// --------------------------------------------------/kategori tari---------------------------------------------------------------
+	Route::get('/admin/kategori-tari', [kategoriAdminController::class, 'index']);
+	Route::post('/admin/kategori-tari', [kategoriAdminController::class, 'store']);
+	Route::post('/admin/kategori-tari/{id}', [kategoriAdminController::class, 'update']);
+	Route::get('/admin/kategori-tari/{id}', [kategoriAdminController::class, 'destroy']);
+
+	// --------------------------------------------------/tarian---------------------------------------------------------------
+	Route::get('/admin/tarian', [tarianAdminController::class, 'index']);
+	Route::post('/admin/tarian', [tarianAdminController::class, 'store']);
+	Route::post('/admin/tarian/{id}', [tarianAdminController::class, 'update']);
+	Route::get('/admin/tarian/{id}', [tarianAdminController::class, 'destroy']);
 	// --------------------------------------------------/done-----------------------------------------------------------------
 
-	Route::get('/admin/kategori-tari', function () {
-		return view('admin.pages.DataKategoriTari');
-	});
-	Route::get('/admin/tarian', function () {
-		return view('admin.pages.DataTarian');
-	});
+
 	Route::get('/admin/video', function () {
 		return view('admin.pages.DataVideo');
 	});
