@@ -296,7 +296,12 @@
       // end selectpicker
 
       // datatables
-      $('.datatables').DataTable();
+      $('.datatables').DataTable({
+        "columnDefs": [{
+          "targets": 'no-sort',
+          "orderable": false,
+        }]
+      });
       // end datatables
 
       $(".custom-file-input").on("change", function() {

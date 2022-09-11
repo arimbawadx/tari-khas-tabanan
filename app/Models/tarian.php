@@ -12,4 +12,8 @@ class tarian extends Model
     {
         return $this->hasMany('App\Models\video');
     }
+    public function photo()
+    {
+        return $this->hasMany('App\Models\photo');
+    }
 }

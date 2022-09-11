@@ -107,7 +107,7 @@
                                             <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataVideo{{$d->id}}">
                                                     <i class="fa fa-pen"></i><span></span>
                                                 </button>
-                                                <button video-id="1" nama-video="test" class="btn btn-danger delete_video">
+                                                <button video-id="{{$d->id}}" nama-video="{{$d->judul_video}}" class="btn btn-danger delete_video">
                                                     <i class="fa fa-trash"></i><span></span>
                                                 </button>
                                             </td>
@@ -121,7 +121,7 @@
                                                     <!-- Modal Header -->
                                                     <div class="modal-header">
                                                         <h4 class="modal-title">Data Video<br>
-                                                            <p class="text-sm">Judul</p>
+                                                            <p class="text-sm">{{$d->judul_video}}</p>
                                                         </h4>
                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                     </div>
@@ -158,10 +158,10 @@
                                                         <div class="progress">
                                                             <div class="progress-bar" role="progressbar"></div>
                                                         </div>
-                                                        <div id="uploadStatusUbah"></div>
-                                                        <div id="cancelUploadUbah"></div>
+                                                        <div class="uploadStatusUbah"></div>
+                                                        <div class="cancelUploadUbah"></div>
 
-                                                        <form id="uploadFormVideoUbah" video-id="{{$d->id}}" method="post" enctype="multipart/form-data">
+                                                        <form class="uploadFormVideoUbah" video-id="{{$d->id}}" method="post" enctype="multipart/form-data">
                                                             {{csrf_field()}}
                                                             <div class="form-group">
                                                                 <label for="tarians_id">Tarian</label>
@@ -270,7 +270,7 @@
         // Ubah 
         var ajaxCallUbah;
         $(".progress").hide();
-        $("#uploadFormVideoUbah").on('submit', function(e) {
+        $(".uploadFormVideoUbah").on('submit', function(e) {
             var video_id = $(this).attr('video-id');
             $(".progress").show();
             e.preventDefault();
@@ -295,40 +295,64 @@
                 processData: false,
                 beforeSend: function() {
                     $(".progress-bar").width('0%');
-                    $('#uploadStatusUbah').html('<div id="uploadStatusUbah"></div>');
-                    $('#cancelUploadUbah').html('<button type="button" class="btn btn-danger btn-sm mt-2 mb-5">cancel</button>');
+                    $('.uploadStatusUbah').html('<div class="uploadStatusUbah"></div>');
+                    $('.cancelUploadUbah').html('<button type="button" class="btn btn-danger btn-sm mt-2 mb-5">cancel</button>');
                     $('.submitUploadVideo').hide();
                     $('.submitUploading').html('<button type="button" disabled class="btn btn-primary float-right"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Updating..</button>');
                 },
                 error: function() {
-                    $('#uploadStatusUbah').html('<p style="color:#EA4335;">File upload failed, please try again.</p>');
+                    $('.uploadStatusUbah').html('<p style="color:#EA4335;">File upload failed, please try again.</p>');
                 },
                 success: function(resp) {
                     if (resp == 'ok') {
-                        $('#uploadFormVideoUbah')[0].reset();
-                        $('#uploadStatusUbah').html('<p style="color:#28A74B;">File has uploaded successfully!</p>');
-                        $('#cancelUploadUbah').hide();
+                        $('.uploadFormVideoUbah')[0].reset();
+                        $('.uploadStatusUbah').html('<p style="color:#28A74B;">File has uploaded successfully!</p>');
+                        $('.cancelUploadUbah').hide();
                         window.location.reload();
                     } else if (resp == 'err') {
-                        $('#uploadStatusUbah').html('<p style="color:#EA4335;">Please select a valid file to upload.</p>');
+                        $('.uploadStatusUbah').html('<p style="color:#EA4335;">Please select a valid file to upload.</p>');
                     } else if (resp == 'ok_tb_only') {
-                        $('#uploadStatusUbah').html('<p style="color:#28A74B;">Data Berhasil Diperbaharui</p>');
-                        $('#cancelUploadUbah').hide();
+                        $('.uploadStatusUbah').html('<p style="color:#28A74B;">Data Berhasil Diperbaharui</p>');
+                        $('.cancelUploadUbah').hide();
                         window.location.reload();
                     }
                 }
             });
         });
 
-        $(document).on('click', '#cancelUploadUbah', function(e) {
+        $(document).on('click', '.cancelUploadUbah', function(e) {
             ajaxCallUbah.abort();
             window.location.reload();
-            $('#uploadStatusUbah').html('<p style="color:#EA4335;">Upload dibatalkan</p>');
-            $('#cancelUploadUbah').html('<div id="cancelUploadUbah"></div>');
+            $('.uploadStatusUbah').html('<p style="color:#EA4335;">Upload dibatalkan</p>');
+            $('.cancelUploadUbah').html('<div id="cancelUploadUbah"></div>');
             $(".progress-bar").width('0%');
             $(".progress-bar").html('0%');
         });
         // End ubah
+
+
+        // delete video
+        $('.delete_video').click(function() {
+            var video_id = $(this).attr('video-id');
+            var nama_video = $(this).attr('nama-video');
+
+            Swal.fire({
+                title: "Yakin hapus " + nama_video + " ?",
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'Hapus',
+                denyButtonText: `Batal`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    window.location = "/admin/video/" + video_id;
+                    Swal.fire('Data terhapus!', '', 'success')
+                } else if (result.isDenied) {
+                    Swal.fire('Jangan Ragu!', '', 'warning')
+                }
+            })
+        });
+        // end delete video
 
     });
 </script>

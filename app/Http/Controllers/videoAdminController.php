@@ -143,6 +143,9 @@ class videoAdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $video = video::find($id);
+        File::delete(public_path("lte/dist/video/" . $video->file_video));
+        $video->delete();
+        return redirect('/admin/video');
     }
 }

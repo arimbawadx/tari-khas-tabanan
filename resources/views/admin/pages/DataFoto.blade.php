@@ -49,15 +49,24 @@
                                             <form id="uploadFormFoto" method="post" enctype="multipart/form-data">
                                                 {{csrf_field()}}
                                                 <div class="form-group">
+                                                    <label for="tarians_id">Tarian</label>
+                                                    <select required name="tarians_id" class="form-control @error('tarians_id') is-invalid @enderror" id="tarians_id">
+                                                        <option value="">Pilih</option>
+                                                        @foreach($tarians as $i => $t)
+                                                        <option value="{{$t->id}}">{{$t->nama_tari}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
                                                     <label for="judul_foto">Judul Foto</label>
                                                     <input required autocomplete="off" type="text" class="form-control @error('judul_foto') is-invalid @enderror" id="judul_foto" name="judul_foto" placeholder="Masukan Judul Foto">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label required for="sumber_foto">Sumber</label>
-                                                    <input autocomplete="off" type="text" class="form-control @error('sumber_foto') is-invalid @enderror" id="sumber_foto" name="sumber_foto" placeholder="Masukan Sumber Foto">
+                                                    <label for="sumber_foto">Sumber</label>
+                                                    <input required autocomplete="off" type="text" class="form-control @error('sumber_foto') is-invalid @enderror" id="sumber_foto" name="sumber_foto" placeholder="Masukan Sumber Foto">
                                                 </div>
                                                 <div class="custom-file my-3">
-                                                    <input accept="image/*" required="" name="file" type="file" class="custom-file-input" id="fileInputFoto">
+                                                    <input accept="image/*" required="" name="file" type="file" class="custom-file-input" id="fileInput">
                                                     <label class="custom-file-label" for="customFile">Upload Foto</label>
                                                 </div>
 
@@ -84,34 +93,35 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach($data as $i => $d)
                                         <tr>
-                                            <td>1</td>
-                                            <td>5</td>
-                                            <td>Tari Kidang Kencana</td>
-                                            <td>Youtube Ngetis Picture</td>
+                                            <td>{{$d->id}}</td>
+                                            <td>{{$d->tarians_id}}</td>
+                                            <td>{{$d->judul_foto}}</td>
+                                            <td>{{$d->sumber}}</td>
                                             <td class="text-center">
-                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalViewDataFoto1">
+                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalViewDataFoto{{$d->id}}">
                                                     <i class="fa fa-image"></i><span></span>
                                                 </button>
                                             </td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataFoto1">
+                                            <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataFoto{{$d->id}}">
                                                     <i class="fa fa-pen"></i><span></span>
                                                 </button>
-                                                <button foto-id="1" nama-foto="test" class="btn btn-danger delete_foto">
+                                                <button foto-id="{{$d->id}}" nama-foto="{{$d->judul_foto}}" class="btn btn-danger delete_foto">
                                                     <i class="fa fa-trash"></i><span></span>
                                                 </button>
                                             </td>
                                         </tr>
 
                                         <!-- The Modal View data Foto-->
-                                        <div class="modal" id="myModalViewDataFoto1">
+                                        <div class="modal" id="myModalViewDataFoto{{$d->id}}">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
 
                                                     <!-- Modal Header -->
                                                     <div class="modal-header">
                                                         <h4 class="modal-title">Data Foto<br>
-                                                            <p class="text-sm">Judul</p>
+                                                            <p class="text-sm">{{$d->judul_foto}}</p>
                                                         </h4>
                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                     </div>
@@ -120,7 +130,7 @@
                                                     <div class="modal-body">
                                                         <div class="row">
                                                             <div class="col-lg-12">
-                                                                <img src="{{asset('lte/dist/img/bungansandat/Photo (4).JPG')}}" class="d-block w-100" alt="...">
+                                                                <img src="{{asset('lte/dist/foto/'.$d->file_foto)}}" width="100%">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -129,7 +139,7 @@
                                         </div>
 
                                         <!-- The Modal Ubah data Foto-->
-                                        <div class="modal" id="myModalUbahDataFoto1">
+                                        <div class="modal" id="myModalUbahDataFoto{{$d->id}}">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
 
@@ -143,29 +153,47 @@
 
                                                     <!-- Modal body -->
                                                     <div class="modal-body">
-                                                        <form id="uploadFormFotoUbah" method="post" enctype="multipart/form-data">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar"></div>
+                                                        </div>
+                                                        <div class="uploadStatusUbah"></div>
+                                                        <div class="cancelUploadUbah"></div>
+
+                                                        <form class="uploadFormFotoUbah" foto-id="{{$d->id}}" method="post" enctype="multipart/form-data">
                                                             {{csrf_field()}}
                                                             <div class="form-group">
-                                                                <label for="judul_foto">Judul Foto</label>
-                                                                <input required autocomplete="off" type="text" class="form-control @error('judul_foto') is-invalid @enderror" id="judul_foto" name="judul_foto" value="Judul">
+                                                                <label for="tarians_id">Tarian</label>
+                                                                <select required name="tarians_id" class="form-control @error('tarians_id') is-invalid @enderror" id="tarians_id">
+                                                                    <option value="{{$d->tarians_id}}">{{$d->tarian->nama_tari}}</option>
+                                                                    @foreach($tarians as $i => $t)
+                                                                    @if($t->id!=$d->tarians_id)
+                                                                    <option value="{{$t->id}}">{{$t->nama_tari}}</option>
+                                                                    @endif
+                                                                    @endforeach
+                                                                </select>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label required for="sumber_foto">Sumber</label>
-                                                                <input autocomplete="off" type="text" class="form-control @error('sumber_foto') is-invalid @enderror" id="sumber_foto" name="sumber_foto" value="Sumber">
+                                                                <label for="judul_foto">Judul Foto</label>
+                                                                <input required autocomplete="off" type="text" class="form-control @error('judul_foto') is-invalid @enderror" id="judul_foto" name="judul_foto" value="{{$d->judul_foto}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="sumber_foto">Sumber</label>
+                                                                <input required autocomplete="off" type="text" class="form-control @error('sumber_foto') is-invalid @enderror" id="sumber_foto" name="sumber_foto" value="{{$d->sumber}}">
                                                             </div>
                                                             <div class="custom-file my-3">
-                                                                <input accept="image/*" required="" name="file" type="file" class="custom-file-input" id="fileInputFotoUbah">
-                                                                <label class="custom-file-label" for="customFile">Upload Foto</label>
+                                                                <input accept="image/*" name="file" type="file" class="custom-file-input" id="fileInputUbah">
+                                                                <label class="custom-file-label" for="customFile">Upload Ulang Foto</label>
                                                             </div>
 
-                                                            <button type="button" class="btn btn-secondary float-right ml-1" data-dismiss="modal"><i class="fa fa-arrow-left"></i>Kembali</button>
-                                                            <button type="submit" class="btn btn-primary float-right submitUploadFotoUbah"><i class="fa fa-plus"></i> Tambah</button>
+                                                            <button type="button" class="btn btn-secondary float-right ml-1" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Kembali</button>
+                                                            <button type="submit" class="btn btn-primary float-right submitUploadFotoUbah"><i class="fa fa-pen"></i> Ubah</button>
                                                             <div class="submitUploadingUbah"></div>
                                                         </form>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -179,9 +207,10 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        // Tambah
         var ajaxCall;
         $(".progress").hide();
-        $("#uploadFormVideo").on('submit', function(e) {
+        $("#uploadFormFoto").on('submit', function(e) {
             $(".progress").show();
             e.preventDefault();
             ajaxCall = $.ajax({
@@ -198,7 +227,7 @@
                     return xhr;
                 },
                 type: 'POST',
-                url: '/admin/upload-video',
+                url: '/admin/foto',
                 data: new FormData(this),
                 contentType: false,
                 cache: false,
@@ -207,7 +236,7 @@
                     $(".progress-bar").width('0%');
                     $('#uploadStatus').html('<div id="uploadStatus"></div>');
                     $('#cancelUpload').html('<button type="button" class="btn btn-danger btn-sm mt-2 mb-5">cancel</button>');
-                    $('.submitUploadVideo').hide();
+                    $('.submitUploadFoto').hide();
                     $('.submitUploading').html('<button type="button" disabled class="btn btn-primary float-right"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Uploading..</button>');
                 },
                 error: function() {
@@ -215,10 +244,9 @@
                 },
                 success: function(resp) {
                     if (resp == 'ok') {
-                        $('#uploadFormVideo')[0].reset();
+                        $('#uploadFormFoto')[0].reset();
                         $('#uploadStatus').html('<p style="color:#28A74B;">File has uploaded successfully!</p>');
                         $('#cancelUpload').hide();
-                        $('#submitUploading').hide();
                         window.location.reload();
                     } else if (resp == 'err') {
                         $('#uploadStatus').html('<p style="color:#EA4335;">Please select a valid file to upload.</p>');
@@ -235,19 +263,95 @@
             $(".progress-bar").width('0%');
             $(".progress-bar").html('0%');
         });
+        // end tambah
+
+        // Ubah 
+        var ajaxCallUbah;
+        $(".progress").hide();
+        $(".uploadFormFotoUbah").on('submit', function(e) {
+            var foto_id = $(this).attr('foto-id');
+            $(".progress").show();
+            e.preventDefault();
+            ajaxCallUbah = $.ajax({
+                xhr: function() {
+                    var xhr = new window.XMLHttpRequest();
+                    xhr.upload.addEventListener("progress", function(evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = ((evt.loaded / evt.total) * 100);
+                            percentComplete = percentComplete.toFixed(0);
+                            $(".progress-bar").width(percentComplete + '%');
+                            $(".progress-bar").html(percentComplete + '%');
+                        }
+                    }, false);
+                    return xhr;
+                },
+                type: 'POST',
+                url: '/admin/foto/' + foto_id,
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function() {
+                    $(".progress-bar").width('0%');
+                    $('.uploadStatusUbah').html('<div class="uploadStatusUbah"></div>');
+                    $('.cancelUploadUbah').html('<button type="button" class="btn btn-danger btn-sm mt-2 mb-5">cancel</button>');
+                    $('.submitUploadFoto').hide();
+                    $('.submitUploading').html('<button type="button" disabled class="btn btn-primary float-right"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Updating..</button>');
+                },
+                error: function() {
+                    $('.uploadStatusUbah').html('<p style="color:#EA4335;">File upload failed, please try again.</p>');
+                },
+                success: function(resp) {
+                    if (resp == 'ok') {
+                        $('#uploadFormFotoUbah')[0].reset();
+                        $('.uploadStatusUbah').html('<p style="color:#28A74B;">File has uploaded successfully!</p>');
+                        $('.cancelUploadUbah').hide();
+                        window.location.reload();
+                    } else if (resp == 'err') {
+                        $('.uploadStatusUbah').html('<p style="color:#EA4335;">Please select a valid file to upload.</p>');
+                    } else if (resp == 'ok_tb_only') {
+                        $('.uploadStatusUbah').html('<p style="color:#28A74B;">Data Berhasil Diperbaharui</p>');
+                        $('.cancelUploadUbah').hide();
+                        window.location.reload();
+                    }
+                }
+            });
+        });
+
+        $(document).on('click', '#cancelUploadUbah', function(e) {
+            ajaxCallUbah.abort();
+            window.location.reload();
+            $('.uploadStatusUbah').html('<p style="color:#EA4335;">Upload dibatalkan</p>');
+            $('#cancelUploadUbah').html('<div id="cancelUploadUbah"></div>');
+            $(".progress-bar").width('0%');
+            $(".progress-bar").html('0%');
+        });
+        // End ubah
 
 
-        // File type validation
-        // $("#fileInput").change(function() {
-        //     var allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.ms-office', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/jpeg', 'image/png', 'image/jpg', 'image/gif'];
-        //     var file = this.files[0];
-        //     var fileType = file.type;
-        //     if (!allowedTypes.includes(fileType)) {
-        //         alert('Please select a valid file (PDF/DOC/DOCX/JPEG/JPG/PNG/GIF).');
-        //         $("#fileInput").val('');
-        //         return false;
-        //     }
-        // });
+        // delete foto
+        $('.delete_foto').click(function() {
+            var foto_id = $(this).attr('foto-id');
+            var nama_foto = $(this).attr('nama-foto');
+
+            Swal.fire({
+                title: "Yakin hapus " + nama_foto + " ?",
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'Hapus',
+                denyButtonText: `Batal`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    window.location = "/admin/foto/" + foto_id;
+                    Swal.fire('Data terhapus!', '', 'success')
+                } else if (result.isDenied) {
+                    Swal.fire('Jangan Ragu!', '', 'warning')
+                }
+            })
+        });
+        // end delete foto
+
     });
 </script>
 <!-- /.content-wrapper -->

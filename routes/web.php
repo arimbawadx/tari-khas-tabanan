@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authController;
+use App\Http\Controllers\bannerAdminController;
 use App\Http\Controllers\dashboardAdminController;
+use App\Http\Controllers\fotoAdminController;
 use App\Http\Controllers\kategoriAdminController;
 use App\Http\Controllers\sanggarAdminController;
 use App\Http\Controllers\tarianAdminController;
@@ -56,11 +58,20 @@ Route::middleware(['SessionAdmin'])->group(function () {
 	Route::post('/admin/video', [videoAdminController::class, 'store']);
 	Route::post('/admin/video/{id}', [videoAdminController::class, 'update']);
 	Route::get('/admin/video/{id}', [videoAdminController::class, 'destroy']);
+
+	// --------------------------------------------------/foto---------------------------------------------------------------
+	Route::get('/admin/foto', [fotoAdminController::class, 'index']);
+	Route::post('/admin/foto', [fotoAdminController::class, 'store']);
+	Route::post('/admin/foto/{id}', [fotoAdminController::class, 'update']);
+	Route::get('/admin/foto/{id}', [fotoAdminController::class, 'destroy']);
+
+	// --------------------------------------------------/banner---------------------------------------------------------------
+	Route::get('/admin/banner', [bannerAdminController::class, 'index']);
+	Route::post('/admin/banner', [bannerAdminController::class, 'store']);
+	Route::post('/admin/banner/{id}', [bannerAdminController::class, 'update']);
+	Route::get('/admin/banner/{id}', [bannerAdminController::class, 'destroy']);
 	// --------------------------------------------------/done-----------------------------------------------------------------
 
-	Route::get('/admin/foto', function () {
-		return view('admin.pages.DataFoto');
-	});
 });
 // =============================================================End Admin=======================================================
 
