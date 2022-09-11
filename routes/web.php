@@ -50,13 +50,14 @@ Route::middleware(['SessionAdmin'])->group(function () {
 	Route::post('/admin/tarian', [tarianAdminController::class, 'store']);
 	Route::post('/admin/tarian/{id}', [tarianAdminController::class, 'update']);
 	Route::get('/admin/tarian/{id}', [tarianAdminController::class, 'destroy']);
+
+	// --------------------------------------------------/video---------------------------------------------------------------
+	Route::get('/admin/video', [videoAdminController::class, 'index']);
+	Route::post('/admin/video', [videoAdminController::class, 'store']);
+	Route::post('/admin/video/{id}', [videoAdminController::class, 'update']);
+	Route::get('/admin/video/{id}', [videoAdminController::class, 'destroy']);
 	// --------------------------------------------------/done-----------------------------------------------------------------
 
-
-	Route::get('/admin/video', function () {
-		return view('admin.pages.DataVideo');
-	});
-	Route::post('/admin/upload-video', [videoAdminController::class, 'store']);
 	Route::get('/admin/foto', function () {
 		return view('admin.pages.DataFoto');
 	});

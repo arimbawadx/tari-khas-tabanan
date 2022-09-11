@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\tarian;
+use App\Models\video;
 use Illuminate\Http\Request;
 
 class videoAdminController extends Controller
@@ -13,7 +15,9 @@ class videoAdminController extends Controller
      */
     public function index()
     {
-        //
+        $data = video::all();
+        $tarians = tarian::all();
+        return view('admin.pages.DataVideo', compact('data', 'tarians'));
     }
 
     /**
@@ -34,28 +38,31 @@ class videoAdminController extends Controller
      */
     public function store(Request $request)
     {
-        // return "test";
+
         $upload = 'err';
-        if (!empty($_FILES['file'])) {
+        if (!empty($request->file('file'))) {
+
+            // menyimpan data file yang diupload ke variabel $file
+            $file = $request->file('file');
+
+            // nama file
+            $namaFile = 'video_' . date('dmYhis') . '.' . $file->getClientOriginalExtension();
 
             // File upload configuration 
-            $targetDir = "lte/dist/video";
+            $tujuan_upload = public_path("lte/dist/video");
             // $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg', 'gif');
 
-            $fileName = basename($_FILES['file']['name']);
-            $targetFilePath = $targetDir . $fileName;
-            if (move_uploaded_file($_FILES['file']['tmp_name'], $targetFilePath)) {
-                $upload = 'ok';
+            $file->move($tujuan_upload, $namaFile);
+            if (file_exists(public_path("lte/dist/video/" . $namaFile))) {
+                $upload = "ok";
+                // add to table
+                $video = new video;
+                $video->tarians_id = $request->tarians_id;
+                $video->judul_video = $request->judul_video;
+                $video->file_video = $namaFile;
+                $video->sumber = $request->sumber_video;
+                $video->save();
             }
-
-            // Check whether file type is valid 
-            // $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
-            // if (in_array($fileType, $allowTypes)) {
-            //     // Upload file to the server 
-            //     if (move_uploaded_file($_FILES['file']['tmp_name'], $targetFilePath)) {
-            //         $upload = 'ok';
-            //     }
-            // }
         }
         echo $upload;
     }

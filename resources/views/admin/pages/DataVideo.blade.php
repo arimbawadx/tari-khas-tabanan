@@ -49,12 +49,21 @@
                                             <form id="uploadFormVideo" method="post" enctype="multipart/form-data">
                                                 {{csrf_field()}}
                                                 <div class="form-group">
+                                                    <label for="tarians_id">Tarian</label>
+                                                    <select required name="tarians_id" class="form-control @error('tarians_id') is-invalid @enderror" id="tarians_id">
+                                                        <option value="">Pilih</option>
+                                                        @foreach($tarians as $i => $t)
+                                                        <option value="{{$t->id}}">{{$t->nama_tari}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
                                                     <label for="judul_video">Judul Video</label>
                                                     <input required autocomplete="off" type="text" class="form-control @error('judul_video') is-invalid @enderror" id="judul_video" name="judul_video" placeholder="Masukan Judul Video">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label required for="sumber_video">Sumber</label>
-                                                    <input autocomplete="off" type="text" class="form-control @error('sumber_video') is-invalid @enderror" id="sumber_video" name="sumber_video" placeholder="Masukan Sumber Video">
+                                                    <label for="sumber_video">Sumber</label>
+                                                    <input required autocomplete="off" type="text" class="form-control @error('sumber_video') is-invalid @enderror" id="sumber_video" name="sumber_video" placeholder="Masukan Sumber Video">
                                                 </div>
                                                 <div class="custom-file my-3">
                                                     <input accept="video/mp4,video/x-m4v,video/*" required="" name="file" type="file" class="custom-file-input" id="fileInput">
@@ -89,6 +98,25 @@
                                             <td>6</td>
                                             <td>Tari Kidang Kencana</td>
                                             <td>Youtube Ngetis Picture</td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalViewDataVideo1">
+                                                    <i class="fa fa-video"></i><span></span>
+                                                </button>
+                                            </td>
+                                            <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataVideo1">
+                                                    <i class="fa fa-pen"></i><span></span>
+                                                </button>
+                                                <button video-id="1" nama-video="test" class="btn btn-danger delete_video">
+                                                    <i class="fa fa-trash"></i><span></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        @foreach($data as $i => $d)
+                                        <tr>
+                                            <td>{{$d->id}}</td>
+                                            <td>{{$d->tarians_id}}</td>
+                                            <td>{{$d->judul_video}}</td>
+                                            <td>{{$d->sumber}}</td>
                                             <td class="text-center">
                                                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalViewDataVideo1">
                                                     <i class="fa fa-video"></i><span></span>
@@ -168,6 +196,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -200,7 +229,7 @@
                     return xhr;
                 },
                 type: 'POST',
-                url: '/admin/upload-video',
+                url: '/admin/video',
                 data: new FormData(this),
                 contentType: false,
                 cache: false,
