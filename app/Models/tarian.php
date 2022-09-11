@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class tarian extends Model
 {
     use HasFactory;
+    public function video()
+    {
+        return $this->hasMany('App\Models\video');
+    }
 }

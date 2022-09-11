@@ -93,24 +93,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>6</td>
-                                            <td>Tari Kidang Kencana</td>
-                                            <td>Youtube Ngetis Picture</td>
-                                            <td class="text-center">
-                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalViewDataVideo1">
-                                                    <i class="fa fa-video"></i><span></span>
-                                                </button>
-                                            </td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataVideo1">
-                                                    <i class="fa fa-pen"></i><span></span>
-                                                </button>
-                                                <button video-id="1" nama-video="test" class="btn btn-danger delete_video">
-                                                    <i class="fa fa-trash"></i><span></span>
-                                                </button>
-                                            </td>
-                                        </tr>
                                         @foreach($data as $i => $d)
                                         <tr>
                                             <td>{{$d->id}}</td>
@@ -118,11 +100,11 @@
                                             <td>{{$d->judul_video}}</td>
                                             <td>{{$d->sumber}}</td>
                                             <td class="text-center">
-                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalViewDataVideo1">
+                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalViewDataVideo{{$d->id}}">
                                                     <i class="fa fa-video"></i><span></span>
                                                 </button>
                                             </td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataVideo1">
+                                            <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataVideo{{$d->id}}">
                                                     <i class="fa fa-pen"></i><span></span>
                                                 </button>
                                                 <button video-id="1" nama-video="test" class="btn btn-danger delete_video">
@@ -132,7 +114,7 @@
                                         </tr>
 
                                         <!-- The Modal View data Video-->
-                                        <div class="modal" id="myModalViewDataVideo1">
+                                        <div class="modal" id="myModalViewDataVideo{{$d->id}}">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
 
@@ -149,7 +131,7 @@
                                                         <div class="row">
                                                             <div class="col-lg-12">
                                                                 <video width="100%" height="100%" controls>
-                                                                    <source src="{{asset('lte/dist/img/test.mp4')}}" type="video/mp4">
+                                                                    <source src="{{asset('lte/dist/video/'.$d->file_video)}}" type="video/mp4">
                                                                 </video>
                                                             </div>
                                                         </div>
@@ -159,7 +141,7 @@
                                         </div>
 
                                         <!-- The Modal Ubah data Video-->
-                                        <div class="modal" id="myModalUbahDataVideo1">
+                                        <div class="modal" id="myModalUbahDataVideo{{$d->id}}">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
 
@@ -173,23 +155,40 @@
 
                                                     <!-- Modal body -->
                                                     <div class="modal-body">
-                                                        <form id="uploadFormVideoUbah" method="post" enctype="multipart/form-data">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar"></div>
+                                                        </div>
+                                                        <div id="uploadStatusUbah"></div>
+                                                        <div id="cancelUploadUbah"></div>
+
+                                                        <form id="uploadFormVideoUbah" video-id="{{$d->id}}" method="post" enctype="multipart/form-data">
                                                             {{csrf_field()}}
                                                             <div class="form-group">
-                                                                <label for="judul_video">Judul Video</label>
-                                                                <input required autocomplete="off" type="text" class="form-control @error('judul_video') is-invalid @enderror" id="judul_video" name="judul_video" value="Judul">
+                                                                <label for="tarians_id">Tarian</label>
+                                                                <select required name="tarians_id" class="form-control @error('tarians_id') is-invalid @enderror" id="tarians_id">
+                                                                    <option value="{{$d->tarians_id}}">{{$d->tarian->nama_tari}}</option>
+                                                                    @foreach($tarians as $i => $t)
+                                                                    @if($t->id!=$d->tarians_id)
+                                                                    <option value="{{$t->id}}">{{$t->nama_tari}}</option>
+                                                                    @endif
+                                                                    @endforeach
+                                                                </select>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label required for="sumber_video">Sumber</label>
-                                                                <input autocomplete="off" type="text" class="form-control @error('sumber_video') is-invalid @enderror" id="sumber_video" name="sumber_video" value="Sumber">
+                                                                <label for="judul_video">Judul Video</label>
+                                                                <input required autocomplete="off" type="text" class="form-control @error('judul_video') is-invalid @enderror" id="judul_video" name="judul_video" value="{{$d->judul_video}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="sumber_video">Sumber</label>
+                                                                <input required autocomplete="off" type="text" class="form-control @error('sumber_video') is-invalid @enderror" id="sumber_video" name="sumber_video" value="{{$d->sumber}}">
                                                             </div>
                                                             <div class="custom-file my-3">
-                                                                <input accept="video/mp4,video/x-m4v,video/*" required="" name="file" type="file" class="custom-file-input" id="fileInputUbah">
-                                                                <label class="custom-file-label" for="customFile">Upload Video</label>
+                                                                <input accept="video/mp4,video/x-m4v,video/*" name="file" type="file" class="custom-file-input" id="fileInputUbah">
+                                                                <label class="custom-file-label" for="customFile">Upload Ulang Video</label>
                                                             </div>
 
-                                                            <button type="button" class="btn btn-secondary float-right ml-1" data-dismiss="modal"><i class="fa fa-arrow-left"></i>Kembali</button>
-                                                            <button type="submit" class="btn btn-primary float-right submitUploadVideoUbah"><i class="fa fa-plus"></i> Tambah</button>
+                                                            <button type="button" class="btn btn-secondary float-right ml-1" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Kembali</button>
+                                                            <button type="submit" class="btn btn-primary float-right submitUploadVideoUbah"><i class="fa fa-pen"></i> Ubah</button>
                                                             <div class="submitUploadingUbah"></div>
                                                         </form>
                                                     </div>
@@ -210,6 +209,7 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        // Tambah
         var ajaxCall;
         $(".progress").hide();
         $("#uploadFormVideo").on('submit', function(e) {
@@ -249,7 +249,6 @@
                         $('#uploadFormVideo')[0].reset();
                         $('#uploadStatus').html('<p style="color:#28A74B;">File has uploaded successfully!</p>');
                         $('#cancelUpload').hide();
-                        $('#submitUploading').hide();
                         window.location.reload();
                     } else if (resp == 'err') {
                         $('#uploadStatus').html('<p style="color:#EA4335;">Please select a valid file to upload.</p>');
@@ -266,19 +265,71 @@
             $(".progress-bar").width('0%');
             $(".progress-bar").html('0%');
         });
+        // end tambah
 
+        // Ubah 
+        var ajaxCallUbah;
+        $(".progress").hide();
+        $("#uploadFormVideoUbah").on('submit', function(e) {
+            var video_id = $(this).attr('video-id');
+            $(".progress").show();
+            e.preventDefault();
+            ajaxCallUbah = $.ajax({
+                xhr: function() {
+                    var xhr = new window.XMLHttpRequest();
+                    xhr.upload.addEventListener("progress", function(evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = ((evt.loaded / evt.total) * 100);
+                            percentComplete = percentComplete.toFixed(0);
+                            $(".progress-bar").width(percentComplete + '%');
+                            $(".progress-bar").html(percentComplete + '%');
+                        }
+                    }, false);
+                    return xhr;
+                },
+                type: 'POST',
+                url: '/admin/video/' + video_id,
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function() {
+                    $(".progress-bar").width('0%');
+                    $('#uploadStatusUbah').html('<div id="uploadStatusUbah"></div>');
+                    $('#cancelUploadUbah').html('<button type="button" class="btn btn-danger btn-sm mt-2 mb-5">cancel</button>');
+                    $('.submitUploadVideo').hide();
+                    $('.submitUploading').html('<button type="button" disabled class="btn btn-primary float-right"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Updating..</button>');
+                },
+                error: function() {
+                    $('#uploadStatusUbah').html('<p style="color:#EA4335;">File upload failed, please try again.</p>');
+                },
+                success: function(resp) {
+                    if (resp == 'ok') {
+                        $('#uploadFormVideoUbah')[0].reset();
+                        $('#uploadStatusUbah').html('<p style="color:#28A74B;">File has uploaded successfully!</p>');
+                        $('#cancelUploadUbah').hide();
+                        window.location.reload();
+                    } else if (resp == 'err') {
+                        $('#uploadStatusUbah').html('<p style="color:#EA4335;">Please select a valid file to upload.</p>');
+                    } else if (resp == 'ok_tb_only') {
+                        $('#uploadStatusUbah').html('<p style="color:#28A74B;">Data Berhasil Diperbaharui</p>');
+                        $('#cancelUploadUbah').hide();
+                        window.location.reload();
+                    }
+                }
+            });
+        });
 
-        // File type validation
-        // $("#fileInput").change(function() {
-        //     var allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.ms-office', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/jpeg', 'image/png', 'image/jpg', 'image/gif'];
-        //     var file = this.files[0];
-        //     var fileType = file.type;
-        //     if (!allowedTypes.includes(fileType)) {
-        //         alert('Please select a valid file (PDF/DOC/DOCX/JPEG/JPG/PNG/GIF).');
-        //         $("#fileInput").val('');
-        //         return false;
-        //     }
-        // });
+        $(document).on('click', '#cancelUploadUbah', function(e) {
+            ajaxCallUbah.abort();
+            window.location.reload();
+            $('#uploadStatusUbah').html('<p style="color:#EA4335;">Upload dibatalkan</p>');
+            $('#cancelUploadUbah').html('<div id="cancelUploadUbah"></div>');
+            $(".progress-bar").width('0%');
+            $(".progress-bar").html('0%');
+        });
+        // End ubah
+
     });
 </script>
 <!-- /.content-wrapper -->
