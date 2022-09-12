@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\sanggar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class sanggarAdminController extends Controller
 {
@@ -36,15 +37,35 @@ class sanggarAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new sanggar;
-        $data->nama_sanggar = $request->nama_sanggar;
-        $data->pemilik = $request->pemilik_sanggar;
-        $data->alamat = $request->alamat_sanggar;
-        $data->titik_kordinat = $request->titik_kordinat;
-        $data->deskripsi = $request->deskripsi_sanggar;
-        $data->save();
+        $upload = 'err';
+        if (!empty($request->file('file'))) {
 
-        return redirect('/admin/data-sanggar');
+            // menyimpan data file yang diupload ke variabel $file
+            $file = $request->file('file');
+
+            // nama file
+            $namaFile = 'logo_' . date('dmYhis') . '.' . $file->getClientOriginalExtension();
+
+            // File upload configuration 
+            $tujuan_upload = public_path("lte/dist/logo");
+
+
+            $file->move($tujuan_upload, $namaFile);
+            if (file_exists(public_path("lte/dist/logo/" . $namaFile))) {
+                $upload = "ok";
+                // add to table
+                $data = new sanggar;
+                $data->logo = $namaFile;
+                $data->nama_sanggar = $request->nama_sanggar;
+                $data->pemilik = $request->pemilik_sanggar;
+                $data->tahun_berdiri = $request->tahun_berdiri;
+                $data->alamat = $request->alamat_sanggar;
+                $data->titik_kordinat = $request->titik_kordinat;
+                $data->deskripsi = $request->deskripsi_sanggar;
+                $data->save();
+            }
+        }
+        echo $upload;
     }
 
     /**
@@ -78,15 +99,46 @@ class sanggarAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = sanggar::find($id);
-        $data->nama_sanggar = $request->nama_sanggar;
-        $data->pemilik = $request->pemilik_sanggar;
-        $data->alamat = $request->alamat_sanggar;
-        $data->titik_kordinat = $request->titik_kordinat;
-        $data->deskripsi = $request->deskripsi_sanggar;
-        $data->save();
+        $upload = 'err';
+        if (!empty($request->file('file'))) {
 
-        return redirect('/admin/data-sanggar');
+            // menyimpan data file yang diupload ke variabel $file
+            $file = $request->file('file');
+
+            // nama file
+            $namaFile = 'logo_' . date('dmYhis') . '.' . $file->getClientOriginalExtension();
+
+            // File upload configuration 
+            $tujuan_upload = public_path("lte/dist/logo");
+
+
+            $file->move($tujuan_upload, $namaFile);
+            if (file_exists(public_path("lte/dist/logo/" . $namaFile))) {
+                $upload = "ok";
+                // add to table
+                $data = sanggar::find($id);
+                File::delete(public_path("lte/dist/logo/" . $data->logo));
+                $data->logo = $namaFile;
+                $data->nama_sanggar = $request->nama_sanggar;
+                $data->pemilik = $request->pemilik_sanggar;
+                $data->tahun_berdiri = $request->tahun_berdiri;
+                $data->alamat = $request->alamat_sanggar;
+                $data->titik_kordinat = $request->titik_kordinat;
+                $data->deskripsi = $request->deskripsi_sanggar;
+                $data->save();
+            }
+        } else {
+            $upload = "ok_tb_only";
+            $data = sanggar::find($id);
+            $data->nama_sanggar = $request->nama_sanggar;
+            $data->pemilik = $request->pemilik_sanggar;
+            $data->tahun_berdiri = $request->tahun_berdiri;
+            $data->alamat = $request->alamat_sanggar;
+            $data->titik_kordinat = $request->titik_kordinat;
+            $data->deskripsi = $request->deskripsi_sanggar;
+            $data->save();
+        }
+        return $upload;
     }
 
     /**

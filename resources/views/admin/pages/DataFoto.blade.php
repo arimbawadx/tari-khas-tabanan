@@ -96,7 +96,7 @@
                                         @foreach($data as $i => $d)
                                         <tr>
                                             <td>{{$d->id}}</td>
-                                            <td>{{$d->tarians_id}}</td>
+                                            <td>{{$d->tarian_id}}</td>
                                             <td>{{$d->judul_foto}}</td>
                                             <td>{{$d->sumber}}</td>
                                             <td class="text-center">
@@ -164,9 +164,9 @@
                                                             <div class="form-group">
                                                                 <label for="tarians_id">Tarian</label>
                                                                 <select required name="tarians_id" class="form-control @error('tarians_id') is-invalid @enderror" id="tarians_id">
-                                                                    <option value="{{$d->tarians_id}}">{{$d->tarian->nama_tari}}</option>
+                                                                    <option value="{{$d->tarian_id}}">{{$d->tarian->nama_tari}}</option>
                                                                     @foreach($tarians as $i => $t)
-                                                                    @if($t->id!=$d->tarians_id)
+                                                                    @if($t->id!=$d->tarian_id)
                                                                     <option value="{{$t->id}}">{{$t->nama_tari}}</option>
                                                                     @endif
                                                                     @endforeach

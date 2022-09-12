@@ -8,6 +8,7 @@ use App\Http\Controllers\dashboardAdminController;
 use App\Http\Controllers\fotoAdminController;
 use App\Http\Controllers\kategoriAdminController;
 use App\Http\Controllers\sanggarAdminController;
+use App\Http\Controllers\sanggarPengunjungController;
 use App\Http\Controllers\tarianAdminController;
 use App\Http\Controllers\tarianPengunjungController;
 use App\Http\Controllers\userAdminController;
@@ -77,20 +78,20 @@ Route::middleware(['SessionAdmin'])->group(function () {
 // =============================================================End Admin=======================================================
 
 
-// ========================================================User=====================================================
+// ========================================================Pengunjung=====================================================
+// --------------------------------------------------/beranda-----------------------------------------------------------------
 Route::get('/', [berandaPengunjungController::class, 'index']);
 
+// --------------------------------------------------/tarian-----------------------------------------------------------------
 Route::get('/tarian', [tarianPengunjungController::class, 'index'])->name('tarian');
-Route::get('/tarian/{id}', [tarianPengunjungController::class, 'show'])->name('tarian');
+Route::get('/tarian/{id}', [tarianPengunjungController::class, 'show']);
+Route::get('/tarian/foto/{id}', [tarianPengunjungController::class, 'showFoto']);
+Route::get('/tarian/video/{id}', [tarianPengunjungController::class, 'showVideo']);
+
+Route::get('/informasi-sanggar', [sanggarPengunjungController::class, 'index']);
+Route::get('/informasi-sanggar/{id}', [sanggarPengunjungController::class, 'show']);
 // --------------------------------------------------/done-----------------------------------------------------------------
 
-Route::get('/informasi-sanggar', function () {
-	return view('user.pages.informasi_sanggar');
-});
-
-Route::get('/informasi-sanggar-detail', function () {
-	return view('user.pages.informasi_sanggar_detail');
-});
 
 Route::get('/kategori-tarian', function () {
 	return view('user.pages.kategori_tarian');
@@ -100,12 +101,4 @@ Route::get('/kategori-tarian-detail', function () {
 	return view('user.pages.kategori_tarian_detail');
 });
 
-
-Route::get('/tarian-foto', function () {
-	return view('user.pages.tarian_foto');
-})->name('tarian');
-
-Route::get('/tarian-video', function () {
-	return view('user.pages.tarian_video');
-})->name('tarian');
-// =============================================================End User=======================================================
+// =============================================================End Pengunjung=======================================================

@@ -32,8 +32,8 @@
                             <div class="row">
                                 <div class="col-6">
                                     <a href="/tarian/{{$tarian->id}}" class="btn btn-danger btn-sm">Detail</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Foto</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Video</a>
+                                    <a href="/tarian/foto/{{$tarian->id}}" class="btn btn-danger btn-sm">Foto</a>
+                                    <a href="/tarian/video/{{$tarian->id}}" class="btn btn-danger btn-sm">Video</a>
                                 </div>
                             </div>
                         </div>

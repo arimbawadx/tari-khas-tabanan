@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\tarian;
+use App\Models\sanggar;
 use Illuminate\Http\Request;
 
-class tarianPengunjungController extends Controller
+class sanggarPengunjungController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $kategoriPilihan = $request->k;
-        $tarians = tarian::all();
-        return view('user.pages.tarian', compact('kategoriPilihan', 'tarians'));
+        $data = sanggar::all();
+        return view('user.pages.informasi_sanggar', compact('data'));
     }
 
     /**
@@ -48,34 +47,8 @@ class tarianPengunjungController extends Controller
      */
     public function show($id)
     {
-        $tarian = tarian::find($id);
-        return view('user.pages.tarian_detail', compact('tarian'));
-    }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function showFoto($id)
-    {
-        $tarian = tarian::where('id', $id)->with('photo')->first();
-        return view('user.pages.tarian_foto', compact('tarian'));
-    }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function showVideo($id)
-    {
-        $tarian = tarian::where('id', $id)->with('video')->first();
-        return view('user.pages.tarian_video', compact('tarian'));
+        $data = sanggar::find($id);
+        return view('user.pages.informasi_sanggar_detail', compact('data'));
     }
 
     /**

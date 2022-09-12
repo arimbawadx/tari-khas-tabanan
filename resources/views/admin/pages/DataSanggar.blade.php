@@ -40,8 +40,19 @@
 
                                         <!-- Modal body -->
                                         <div class="modal-body">
-                                            <form method="post" action="/admin/data-sanggar">
+                                            <form id="uploadFormFoto" method="post" enctype="multipart/form-data">
                                                 {{csrf_field()}}
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar"></div>
+                                                </div>
+                                                <div id="uploadStatus"></div>
+                                                <div id="cancelUpload"></div>
+
+                                                <div class="custom-file my-3">
+                                                    <input accept="image/*" required="" name="file" type="file" class="custom-file-input" id="fileInput">
+                                                    <label class="custom-file-label" for="customFile">Upload Logo</label>
+                                                </div>
+
                                                 <div class="form-group">
                                                     <label for="nama_sanggar">Nama Sanggar</label>
                                                     <input required autocomplete="off" type="text" class="form-control @error('nama_sanggar') is-invalid @enderror" id="nama_sanggar" name="nama_sanggar" placeholder="Masukan Nama Sanggar">
@@ -49,6 +60,10 @@
                                                 <div class="form-group">
                                                     <label for="pemilik_sanggar">Pemilik</label>
                                                     <input required autocomplete="off" type="text" class="form-control @error('pemilik_sanggar') is-invalid @enderror" id="pemilik_sanggar" name="pemilik_sanggar" placeholder="Masukan Pemilik Sanggar">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="tahun_berdiri">Tahun Berdiri</label>
+                                                    <input required autocomplete="off" type="number" class="form-control @error('tahun_berdiri') is-invalid @enderror yearpicker" id="tahun_berdiri" name="tahun_berdiri" placeholder="Masukan Tahun Berdiri">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="alamat_sanggar">Alamat </label>
@@ -79,6 +94,7 @@
                                             <th class="w-auto">ID Sanggar</th>
                                             <th>Nama Sanggar</th>
                                             <th>Pemilik</th>
+                                            <th>Tahun Berdiri</th>
                                             <th>ALamat</th>
                                             <th>Titik Kordinat</th>
                                             <th class="th-lg">Deskripsi</th>
@@ -91,6 +107,7 @@
                                             <td>{{$d->id}}</td>
                                             <td>{{$d->nama_sanggar}}</td>
                                             <td>{{$d->pemilik}}</td>
+                                            <td>{{$d->tahun_berdiri}}</td>
                                             <td>{{$d->alamat}}</td>
                                             <td>{{$d->titik_kordinat}}</td>
                                             <td>{{$d->deskripsi}}</td>
@@ -118,8 +135,18 @@
 
                                                     <!-- Modal body -->
                                                     <div class="modal-body">
-                                                        <form method="post" action="/admin/data-sanggar/{{$d->id}}">
+                                                        <form class="uploadFormFotoUbah" method="post" enctype="multipart/form-data" foto-id="{{$d->id}}">
                                                             {{csrf_field()}}
+                                                            <div class="progress">
+                                                                <div class="progress-bar" role="progressbar"></div>
+                                                            </div>
+                                                            <div class="uploadStatusUbah"></div>
+                                                            <div class="cancelUploadUbah"></div>
+
+                                                            <div class="custom-file my-3">
+                                                                <input accept="image/*" name="file" type="file" class="custom-file-input" id="fileInput">
+                                                                <label class="custom-file-label" for="customFile">Upload Ulang Logo</label>
+                                                            </div>
                                                             <div class="form-group">
                                                                 <label for="nama_sanggar">Nama Sanggar</label>
                                                                 <input required autocomplete="off" type="text" class="form-control @error('nama_sanggar') is-invalid @enderror" id="nama_sanggar" name="nama_sanggar" value="{{$d->nama_sanggar}}">
@@ -127,6 +154,10 @@
                                                             <div class="form-group">
                                                                 <label for="pemilik_sanggar">Pemilik</label>
                                                                 <input required autocomplete="off" type="text" class="form-control @error('pemilik_sanggar') is-invalid @enderror" id="pemilik_sanggar" name="pemilik_sanggar" value="{{$d->pemilik}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="tahun_berdiri">Tahun Berdiri</label>
+                                                                <input required autocomplete="off" type="number" class="form-control @error('tahun_berdiri') is-invalid @enderror yearpicker" id="tahun_berdiri" name="tahun_berdiri" value="{{$d->tahun_berdiri}}">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="alamat_sanggar">Alamat </label>
@@ -162,6 +193,130 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        $(".yearpicker").yearpicker();
+
+        // Tambah
+        var ajaxCall;
+        $(".progress").hide();
+        $("#uploadFormFoto").on('submit', function(e) {
+            $(".progress").show();
+            e.preventDefault();
+            ajaxCall = $.ajax({
+                xhr: function() {
+                    var xhr = new window.XMLHttpRequest();
+                    xhr.upload.addEventListener("progress", function(evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = ((evt.loaded / evt.total) * 100);
+                            percentComplete = percentComplete.toFixed(0);
+                            $(".progress-bar").width(percentComplete + '%');
+                            $(".progress-bar").html(percentComplete + '%');
+                        }
+                    }, false);
+                    return xhr;
+                },
+                type: 'POST',
+                url: '/admin/data-sanggar',
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function() {
+                    $(".progress-bar").width('0%');
+                    $('#uploadStatus').html('<div id="uploadStatus"></div>');
+                    $('#cancelUpload').html('<button type="button" class="btn btn-danger btn-sm mt-2 mb-5">cancel</button>');
+                    $('.submitUploadFoto').hide();
+                    $('.submitUploading').html('<button type="button" disabled class="btn btn-primary float-right"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Uploading..</button>');
+                },
+                error: function() {
+                    $('#uploadStatus').html('<p style="color:#EA4335;">File upload failed, please try again.</p>');
+                },
+                success: function(resp) {
+                    if (resp == 'ok') {
+                        $('#uploadFormFoto')[0].reset();
+                        $('#uploadStatus').html('<p style="color:#28A74B;">File has uploaded successfully!</p>');
+                        $('#cancelUpload').hide();
+                        window.location.reload();
+                    } else if (resp == 'err') {
+                        $('#uploadStatus').html('<p style="color:#EA4335;">Please select a valid file to upload.</p>');
+                    }
+                }
+            });
+        });
+
+        $(document).on('click', '#cancelUpload', function(e) {
+            ajaxCall.abort();
+            window.location.reload();
+            $('#uploadStatus').html('<p style="color:#EA4335;">Upload dibatalkan</p>');
+            $('#cancelUpload').html('<div id="cancelUpload"></div>');
+            $(".progress-bar").width('0%');
+            $(".progress-bar").html('0%');
+        });
+        // end tambah
+
+        // Ubah 
+        var ajaxCallUbah;
+        $(".progress").hide();
+        $(".uploadFormFotoUbah").on('submit', function(e) {
+            var foto_id = $(this).attr('foto-id');
+            $(".progress").show();
+            e.preventDefault();
+            ajaxCallUbah = $.ajax({
+                xhr: function() {
+                    var xhr = new window.XMLHttpRequest();
+                    xhr.upload.addEventListener("progress", function(evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = ((evt.loaded / evt.total) * 100);
+                            percentComplete = percentComplete.toFixed(0);
+                            $(".progress-bar").width(percentComplete + '%');
+                            $(".progress-bar").html(percentComplete + '%');
+                        }
+                    }, false);
+                    return xhr;
+                },
+                type: 'POST',
+                url: '/admin/data-sanggar/' + foto_id,
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function() {
+                    $(".progress-bar").width('0%');
+                    $('.uploadStatusUbah').html('<div class="uploadStatusUbah"></div>');
+                    $('.cancelUploadUbah').html('<button type="button" class="btn btn-danger btn-sm mt-2 mb-5">cancel</button>');
+                    $('.submitUploadFoto').hide();
+                    $('.submitUploading').html('<button type="button" disabled class="btn btn-primary float-right"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Updating..</button>');
+                },
+                error: function() {
+                    $('.uploadStatusUbah').html('<p style="color:#EA4335;">File upload failed, please try again.</p>');
+                },
+                success: function(resp) {
+                    if (resp == 'ok') {
+                        $('#uploadFormFotoUbah')[0].reset();
+                        $('.uploadStatusUbah').html('<p style="color:#28A74B;">File has uploaded successfully!</p>');
+                        $('.cancelUploadUbah').hide();
+                        window.location.reload();
+                    } else if (resp == 'err') {
+                        $('.uploadStatusUbah').html('<p style="color:#EA4335;">Please select a valid file to upload.</p>');
+                    } else if (resp == 'ok_tb_only') {
+                        $('.uploadStatusUbah').html('<p style="color:#28A74B;">Data Berhasil Diperbaharui</p>');
+                        $('.cancelUploadUbah').hide();
+                        window.location.reload();
+                    }
+                }
+            });
+        });
+
+        $(document).on('click', '#cancelUploadUbah', function(e) {
+            ajaxCallUbah.abort();
+            window.location.reload();
+            $('.uploadStatusUbah').html('<p style="color:#EA4335;">Upload dibatalkan</p>');
+            $('#cancelUploadUbah').html('<div id="cancelUploadUbah"></div>');
+            $(".progress-bar").width('0%');
+            $(".progress-bar").html('0%');
+        });
+        // End ubah
+
+
         // delete sanggar
         $('.delete_sanggar').click(function() {
             var sanggar_id = $(this).attr('sanggar-id');

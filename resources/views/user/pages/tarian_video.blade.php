@@ -8,16 +8,27 @@
             <div class="col-lg-12">
                 <div class="card mt-2 card-light text-dark">
                     <div class="card-header text-center">
-                        <h2 class="card-title">Foto Tari Bungan Sandat Serasi</h2>
+                        <h2 class="card-title">Video {{$tarian->nama_tari}}</h2>
                     </div>
                     <div class="card-body">
+                        @if(count($tarian->video)==0)
                         <div class="row">
                             <div class="col-lg-12">
+                                <div class="alert alert-danger" role="alert">
+                                    Belum ada video
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                        @foreach($tarian->video as $i => $v)
+                        <div class="row mb-5">
+                            <div class="col-lg-12">
                                 <video width="100%" height="100%" controls>
-                                    <source src="{{asset('lte/dist/img/test.mp4')}}" type="video/mp4">
+                                    <source src="{{asset('lte/dist/video/'.$v->file_video)}}" type="video/mp4">
                                 </video>
                             </div>
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
