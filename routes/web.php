@@ -3,11 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\bannerAdminController;
+use App\Http\Controllers\berandaPengunjungController;
 use App\Http\Controllers\dashboardAdminController;
 use App\Http\Controllers\fotoAdminController;
 use App\Http\Controllers\kategoriAdminController;
 use App\Http\Controllers\sanggarAdminController;
 use App\Http\Controllers\tarianAdminController;
+use App\Http\Controllers\tarianPengunjungController;
 use App\Http\Controllers\userAdminController;
 use App\Http\Controllers\videoAdminController;
 
@@ -32,6 +34,7 @@ Route::middleware(['SessionAdmin'])->group(function () {
 	Route::post('/admin/data-user', [userAdminController::class, 'store']);
 	Route::post('/admin/data-user/{id}', [userAdminController::class, 'update']);
 	Route::get('/admin/data-user/{id}', [userAdminController::class, 'destroy']);
+
 	// --------------------------------------------------/dashboard-----------------------------------------------------------------
 	Route::get('/admin/dashboard', [dashboardAdminController::class, 'index']);
 
@@ -70,16 +73,16 @@ Route::middleware(['SessionAdmin'])->group(function () {
 	Route::post('/admin/banner', [bannerAdminController::class, 'store']);
 	Route::post('/admin/banner/{id}', [bannerAdminController::class, 'update']);
 	Route::get('/admin/banner/{id}', [bannerAdminController::class, 'destroy']);
-	// --------------------------------------------------/done-----------------------------------------------------------------
-
 });
 // =============================================================End Admin=======================================================
 
 
 // ========================================================User=====================================================
-Route::get('/', function () {
-	return view('user.pages.beranda');
-});
+Route::get('/', [berandaPengunjungController::class, 'index']);
+
+Route::get('/tarian', [tarianPengunjungController::class, 'index'])->name('tarian');
+Route::get('/tarian/{id}', [tarianPengunjungController::class, 'show'])->name('tarian');
+// --------------------------------------------------/done-----------------------------------------------------------------
 
 Route::get('/informasi-sanggar', function () {
 	return view('user.pages.informasi_sanggar');
@@ -97,13 +100,6 @@ Route::get('/kategori-tarian-detail', function () {
 	return view('user.pages.kategori_tarian_detail');
 });
 
-Route::get('/tarian', function () {
-	return view('user.pages.tarian');
-})->name('tarian');
-
-Route::get('/tarian-detail', function () {
-	return view('user.pages.tarian_detail');
-})->name('tarian');
 
 Route::get('/tarian-foto', function () {
 	return view('user.pages.tarian_foto');

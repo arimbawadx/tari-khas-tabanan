@@ -40,7 +40,7 @@ class tarianAdminController extends Controller
     {
         $jenis_tarian = kategori::find($request->kategori_tari)->nama_kategori;
         $data = new tarian;
-        $data->kategoris_id = $request->kategori_tari;
+        $data->kategori_id = $request->kategori_tari;
         $data->nama_tari = $request->nama_tarian;
         $data->pencipta_tari = $request->pencipta_tarian;
         $data->penata_tabuh = $request->penata_tabuh;
@@ -88,7 +88,7 @@ class tarianAdminController extends Controller
     {
         $jenis_tarian = kategori::find($request->kategori_tari)->nama_kategori;
         $data = tarian::find($id);
-        $data->kategoris_id = $request->kategori_tari;
+        $data->kategori_id = $request->kategori_tari;
         $data->nama_tari = $request->nama_tarian;
         $data->pencipta_tari = $request->pencipta_tarian;
         $data->penata_tabuh = $request->penata_tabuh;

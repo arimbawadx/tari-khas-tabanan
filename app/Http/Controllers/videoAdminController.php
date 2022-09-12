@@ -58,7 +58,7 @@ class videoAdminController extends Controller
                 $upload = "ok";
                 // add to table
                 $video = new video;
-                $video->tarians_id = $request->tarians_id;
+                $video->tarian_id = $request->tarians_id;
                 $video->judul_video = $request->judul_video;
                 $video->file_video = $namaFile;
                 $video->sumber = $request->sumber_video;
@@ -118,7 +118,7 @@ class videoAdminController extends Controller
                 // add to table
                 $video = video::find($id);
                 File::delete(public_path("lte/dist/video/" . $video->file_video));
-                $video->tarians_id = $request->tarians_id;
+                $video->tarian_id = $request->tarians_id;
                 $video->judul_video = $request->judul_video;
                 $video->file_video = $namaFile;
                 $video->sumber = $request->sumber_video;
@@ -127,7 +127,7 @@ class videoAdminController extends Controller
         } else {
             $upload = "ok_tb_only";
             $video = video::find($id);
-            $video->tarians_id = $request->tarians_id;
+            $video->tarian_id = $request->tarians_id;
             $video->judul_video = $request->judul_video;
             $video->sumber = $request->sumber_video;
             $video->save();

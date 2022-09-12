@@ -16,7 +16,7 @@ class fotoAdminController extends Controller
      */
     public function index()
     {
-        $data = photo::where('tarians_id', !null)->get();
+        $data = photo::where('tarian_id', !null)->get();
         $tarians = tarian::all();
         return view('admin.pages.DataFoto', compact('data', 'tarians'));
     }
@@ -57,7 +57,7 @@ class fotoAdminController extends Controller
                 $upload = "ok";
                 // add to table
                 $foto = new photo;
-                $foto->tarians_id = $request->tarians_id;
+                $foto->tarian_id = $request->tarians_id;
                 $foto->judul_foto = $request->judul_foto;
                 $foto->file_foto = $namaFile;
                 $foto->sumber = $request->sumber_foto;
@@ -117,7 +117,7 @@ class fotoAdminController extends Controller
                 // add to table
                 $foto = photo::find($id);
                 File::delete(public_path("lte/dist/foto/" . $foto->file_foto));
-                $foto->tarians_id = $request->tarians_id;
+                $foto->tarian_id = $request->tarians_id;
                 $foto->judul_foto = $request->judul_foto;
                 $foto->file_foto = $namaFile;
                 $foto->sumber = $request->sumber_foto;
@@ -126,7 +126,7 @@ class fotoAdminController extends Controller
         } else {
             $upload = "ok_tb_only";
             $foto = photo::find($id);
-            $foto->tarians_id = $request->tarians_id;
+            $foto->tarian_id = $request->tarians_id;
             $foto->judul_foto = $request->judul_foto;
             $foto->sumber = $request->sumber_foto;
             $foto->save();

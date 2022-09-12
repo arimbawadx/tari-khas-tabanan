@@ -16,10 +16,10 @@
         <div class="row h-100 align-items-center">
             <div class="col-lg-1 text-left"><img src="{{asset('lte/dist/img/Lambang_Kabupaten_Tabanan.png')}}" width="100%" alt=""></div>
             <div class="col-lg-2"><img src="{{asset('lte/dist/img/LogoInstiki.png')}}" width="100%" alt=""></div>
-            <div class="col-lg-7 text-center">
-                <h3><strong><em>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id voluptatibus enim atque consequatur non quaerat delectus! Voluptate odio laboriosam soluta.</em></strong></h3>
+            <div class="col-lg-6 text-center">
+                <h2><strong><em>Digitalisasi Budaya Tarian Khas Kabupaten Tabanan</em></strong></h2>
             </div>
-            <div class="col-lg-2 text-right"><img src="{{asset('lte/dist/img/LogoWebsite.png')}}" width="100%" alt=""></div>
+            <div class="col-lg-3 text-right"><img src="{{asset('lte/dist/img/LogoWebsite.png')}}" width="150px" alt=""></div>
         </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
@@ -52,8 +52,16 @@
                         Tarian
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/tarian">Tari Kreasi</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <?php
+
+                        use App\Models\kategori;
+
+                        $kategori = kategori::all();
+
+                        ?>
+                        @foreach($kategori as $i => $k)
+                        <a class="dropdown-item" href="/tarian?k={{$k->nama_kategori}}">{{$k->nama_kategori}}</a>
+                        @endforeach
                     </div>
                 </li>
 

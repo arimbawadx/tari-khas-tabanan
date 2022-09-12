@@ -6,48 +6,25 @@
     <div class="container my-3">
         <div class="row">
             <div class="col-lg-4">
+                @foreach($tarians as $i => $tarian)
                 <a href="#" class="card mt-2 card-light text-dark text-decoration-none">
                     <div class="card-body">
                         <div style="width: 30px; padding:3px; margin-top: -20px; margin-left: -20px;" class="bg-danger text-center text-white">
-                            <h5>1</h5>
+                            <h5>{{$i+1}}</h5>
                         </div>
-                        <h4>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit.</h4>
+                        <h4>{{$tarian->nama_tari}}</h4>
                     </div>
                 </a>
-
-                <a href="#" class="card mt-2 card-light text-dark text-decoration-none">
-                    <div class="card-body">
-                        <div style="width: 30px; padding:3px; margin-top: -20px; margin-left: -20px;" class="bg-danger text-center text-white">
-                            <h5>2</h5>
-                        </div>
-                        <h4>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit.</h4>
-                    </div>
-                </a>
-
-                <a href="#" class="card mt-2 card-light text-dark text-decoration-none">
-                    <div class="card-body">
-                        <div style="width: 30px; padding:3px; margin-top: -20px; margin-left: -20px;" class="bg-danger text-center text-white">
-                            <h5>3</h5>
-                        </div>
-                        <h4>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit.</h4>
-                    </div>
-                </a>
+                @endforeach
             </div>
             <div class="col-lg-4 mt-2">
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{asset('lte/dist/img/photo1.png')}}" class="d-block w-100" alt="...">
+                        @foreach($carausels as $i =>$carausel)
+                        <div class="carousel-item <?php if ($i == 0) : ?> active <?php endif ?>">
+                            <img src="{{asset('lte/dist/banner/'.$carausel->file_foto)}}" class="d-block w-100" alt="...">
                         </div>
-                        <div class="carousel-item">
-                            <img src="{{asset('lte/dist/img/photo2.png')}}" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{asset('lte/dist/img/photo3.jpg')}}" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{asset('lte/dist/img/photo4.jpg')}}" class="d-block w-100" alt="...">
-                        </div>
+                        @endforeach
                     </div>
                     <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

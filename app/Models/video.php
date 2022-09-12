@@ -10,6 +10,6 @@ class video extends Model
     use HasFactory;
     public function tarian()
     {
-        return $this->belongsTo('App\Models\tarian', 'tarians_id');
+        return $this->belongsTo('App\Models\tarian', 'tarian_id');
     }
 }

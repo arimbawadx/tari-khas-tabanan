@@ -16,7 +16,7 @@ class bannerAdminController extends Controller
      */
     public function index()
     {
-        $data = photo::where('tarians_id', null)->get();
+        $data = photo::where('tarian_id', null)->get();
         return view('admin.pages.DataBanner', compact('data'));
     }
 
@@ -56,7 +56,7 @@ class bannerAdminController extends Controller
                 $upload = "ok";
                 // add to table
                 $foto = new photo;
-                $foto->tarians_id = null;
+                $foto->tarian_id = null;
                 $foto->judul_foto = $request->judul_foto;
                 $foto->file_foto = $namaFile;
                 $foto->sumber = $request->sumber_foto;
@@ -116,7 +116,7 @@ class bannerAdminController extends Controller
                 // add to table
                 $foto = photo::find($id);
                 File::delete(public_path("lte/dist/banner/" . $foto->file_foto));
-                $foto->tarians_id = null;
+                $foto->tarian_id = null;
                 $foto->judul_foto = $request->judul_foto;
                 $foto->file_foto = $namaFile;
                 $foto->sumber = $request->sumber_foto;
@@ -125,7 +125,7 @@ class bannerAdminController extends Controller
         } else {
             $upload = "ok_tb_only";
             $foto = photo::find($id);
-            $foto->tarians_id = null;
+            $foto->tarian_id = null;
             $foto->judul_foto = $request->judul_foto;
             $foto->sumber = $request->sumber_foto;
             $foto->save();
