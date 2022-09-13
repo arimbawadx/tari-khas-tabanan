@@ -8,117 +8,44 @@
             <div class="col-lg-12">
                 <div class="card mt-2 card-light text-dark">
                     <div class="card-header text-center">
-                        <h2 class="card-title">Hasil Pencarian : "Tari Kreasi"</h2>
+                        <h2 class="card-title">Hasil Pencarian : "{{$pencarian}}"</h2>
                     </div>
                     <div class="card-body">
-                        <div class="mb-5">
-                            <table class="table">
-                                <tr>
-                                    <td>Nama Tarian</td>
-                                    <td>:</td>
-                                    <td>Tari Bungan Sandat Serasi</td>
-                                </tr>
-                                <tr>
-                                    <td>Tahun Cipta</td>
-                                    <td>:</td>
-                                    <td>2014</td>
-                                </tr>
-                                <tr>
-                                    <td>Kategori</td>
-                                    <td>:</td>
-                                    <td>Tari Kreasi</td>
-                                </tr>
-                            </table>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <a href="#" class="btn btn-danger btn-sm">Detail</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Foto</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Video</a>
+                        @if(count($hasil)==0)
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="alert alert-danger text-center" role="alert">
+                                    Tidak ada yang Anda cari
                                 </div>
                             </div>
                         </div>
-
+                        @endif
+                        @foreach($hasil as $i => $tarian)
                         <div class="mb-5">
-                            <table class="table">
-                                <tr>
-                                    <td>Nama Tarian</td>
-                                    <td>:</td>
-                                    <td>Tari Bungan Sandat Serasi</td>
-                                </tr>
-                                <tr>
-                                    <td>Tahun Cipta</td>
-                                    <td>:</td>
-                                    <td>2014</td>
-                                </tr>
-                                <tr>
-                                    <td>Kategori</td>
-                                    <td>:</td>
-                                    <td>Tari Kreasi</td>
-                                </tr>
-                            </table>
+                            <div class="row p-3 border-top">
+                                <div class="col-5">Nama Tarian</div>
+                                <div class="col-2">:</div>
+                                <div class="col-5">{{$tarian->nama_tari}}</div>
+                            </div>
+                            <div class="row p-3 border-top">
+                                <div class="col-5">Tahun Cipta</div>
+                                <div class="col-2">:</div>
+                                <div class="col-5">{{$tarian->tahun_cipta}}</div>
+                            </div>
+                            <div class="row p-3 border-top">
+                                <div class="col-5">Kategori</div>
+                                <div class="col-2">:</div>
+                                <div class="col-5">{{$tarian->jenis_tarian}}</div>
+                            </div>
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <a href="#" class="btn btn-danger btn-sm">Detail</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Foto</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Video</a>
+                                <div class="col-6">
+                                    <a href="/tarian/{{$tarian->id}}" class="btn btn-danger btn-sm">Detail</a>
+                                    <a href="/tarian/foto/{{$tarian->id}}" class="btn btn-danger btn-sm">Foto</a>
+                                    <a href="/tarian/video/{{$tarian->id}}" class="btn btn-danger btn-sm">Video</a>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="mb-5">
-                            <table class="table">
-                                <tr>
-                                    <td>Nama Tarian</td>
-                                    <td>:</td>
-                                    <td>Tari Bungan Sandat Serasi</td>
-                                </tr>
-                                <tr>
-                                    <td>Tahun Cipta</td>
-                                    <td>:</td>
-                                    <td>2014</td>
-                                </tr>
-                                <tr>
-                                    <td>Kategori</td>
-                                    <td>:</td>
-                                    <td>Tari Kreasi</td>
-                                </tr>
-                            </table>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <a href="#" class="btn btn-danger btn-sm">Detail</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Foto</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Video</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mb-5">
-                            <table class="table">
-                                <tr>
-                                    <td>Nama Tarian</td>
-                                    <td>:</td>
-                                    <td>Tari Bungan Sandat Serasi</td>
-                                </tr>
-                                <tr>
-                                    <td>Tahun Cipta</td>
-                                    <td>:</td>
-                                    <td>2014</td>
-                                </tr>
-                                <tr>
-                                    <td>Kategori</td>
-                                    <td>:</td>
-                                    <td>Tari Kreasi</td>
-                                </tr>
-                            </table>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <a href="#" class="btn btn-danger btn-sm">Detail</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Foto</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Video</a>
-                                </div>
-                            </div>
-                        </div>
-
+                        @endforeach
                     </div>
                 </div>
             </div>

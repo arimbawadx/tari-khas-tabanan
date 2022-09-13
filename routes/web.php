@@ -7,8 +7,10 @@ use App\Http\Controllers\berandaPengunjungController;
 use App\Http\Controllers\dashboardAdminController;
 use App\Http\Controllers\fotoAdminController;
 use App\Http\Controllers\kategoriAdminController;
+use App\Http\Controllers\kategoriPengunjungController;
 use App\Http\Controllers\sanggarAdminController;
 use App\Http\Controllers\sanggarPengunjungController;
+use App\Http\Controllers\settingAdminController;
 use App\Http\Controllers\tarianAdminController;
 use App\Http\Controllers\tarianPengunjungController;
 use App\Http\Controllers\userAdminController;
@@ -74,11 +76,16 @@ Route::middleware(['SessionAdmin'])->group(function () {
 	Route::post('/admin/banner', [bannerAdminController::class, 'store']);
 	Route::post('/admin/banner/{id}', [bannerAdminController::class, 'update']);
 	Route::get('/admin/banner/{id}', [bannerAdminController::class, 'destroy']);
+
+	// --------------------------------------------------/setting---------------------------------------------------------------
+	Route::get('/admin/setting', [settingAdminController::class, 'index']);
+	Route::post('/admin/setting/{id}', [settingAdminController::class, 'update']);
 });
 // =============================================================End Admin=======================================================
 
 
 // ========================================================Pengunjung=====================================================
+
 // --------------------------------------------------/beranda-----------------------------------------------------------------
 Route::get('/', [berandaPengunjungController::class, 'index']);
 
@@ -88,17 +95,12 @@ Route::get('/tarian/{id}', [tarianPengunjungController::class, 'show']);
 Route::get('/tarian/foto/{id}', [tarianPengunjungController::class, 'showFoto']);
 Route::get('/tarian/video/{id}', [tarianPengunjungController::class, 'showVideo']);
 
+// --------------------------------------------------/sanggar-----------------------------------------------------------------
 Route::get('/informasi-sanggar', [sanggarPengunjungController::class, 'index']);
 Route::get('/informasi-sanggar/{id}', [sanggarPengunjungController::class, 'show']);
-// --------------------------------------------------/done-----------------------------------------------------------------
 
-
-Route::get('/kategori-tarian', function () {
-	return view('user.pages.kategori_tarian');
-});
-
-Route::get('/kategori-tarian-detail', function () {
-	return view('user.pages.kategori_tarian_detail');
-});
+// --------------------------------------------------/kategori tarian-----------------------------------------------------------------
+Route::get('/kategori-tarian', [kategoriPengunjungController::class, 'index']);
+Route::get('/kategori-tarian/{id}', [kategoriPengunjungController::class, 'show']);
 
 // =============================================================End Pengunjung=======================================================

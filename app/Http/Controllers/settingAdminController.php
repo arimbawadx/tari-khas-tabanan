@@ -2,28 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\tarian;
+use App\Models\setting;
 use Illuminate\Http\Request;
 
-class tarianPengunjungController extends Controller
+class settingAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $pencarian = $request->s;
-        if ($pencarian) {
-            $hasil = tarian::where('nama_tari', 'like', "%" . $pencarian . "%")
-                ->orWhere('jenis_tarian', 'like', "%" . $pencarian . "%")
-                ->orWhere('tahun_cipta', 'like', "%" . $pencarian . "%")->get();
-            return view('user.pages.search_result', compact('pencarian', 'hasil'));
-        }
-        $kategoriPilihan = $request->k;
-        $tarians = tarian::all();
-        return view('user.pages.tarian', compact('kategoriPilihan', 'tarians'));
+        $d = setting::first();
+        return view('admin.pages.Setting', compact('d'));
     }
 
     /**
@@ -55,34 +47,7 @@ class tarianPengunjungController extends Controller
      */
     public function show($id)
     {
-        $tarian = tarian::find($id);
-        return view('user.pages.tarian_detail', compact('tarian'));
-    }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function showFoto($id)
-    {
-        $tarian = tarian::where('id', $id)->with('photo')->first();
-        return view('user.pages.tarian_foto', compact('tarian'));
-    }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function showVideo($id)
-    {
-        $tarian = tarian::where('id', $id)->with('video')->first();
-        return view('user.pages.tarian_video', compact('tarian'));
+        //
     }
 
     /**
@@ -105,7 +70,11 @@ class tarianPengunjungController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $d = setting::find($id);
+        $d->judul_header = $request->judul_header;
+        $d->tentang_kami = $request->tentang_kami;
+        $d->save();
+        return redirect('/admin/setting');
     }
 
     /**

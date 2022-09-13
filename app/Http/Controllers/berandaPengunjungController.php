@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\photo;
+use App\Models\setting;
 use App\Models\tarian;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,8 @@ class berandaPengunjungController extends Controller
     {
         $tarians = tarian::latest()->take(3)->get();
         $carausels = photo::where('tarian_id', null)->get();
-        return view('user.pages.beranda', compact('carausels', 'tarians'));
+        $setting = setting::first();
+        return view('user.pages.beranda', compact('carausels', 'tarians', 'setting'));
     }
 
     /**

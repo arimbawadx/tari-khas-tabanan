@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class kategoriAdminController extends Controller
 {
@@ -36,11 +37,31 @@ class kategoriAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new kategori;
-        $data->nama_kategori = $request->nama_kategori;
-        $data->save();
+        $upload = 'err';
+        if (!empty($request->file('file'))) {
 
-        return redirect('/admin/kategori-tari');
+            // menyimpan data file yang diupload ke variabel $file
+            $file = $request->file('file');
+
+            // nama file
+            $namaFile = 'img_' . date('dmYhis') . '.' . $file->getClientOriginalExtension();
+
+            // File upload configuration 
+            $tujuan_upload = public_path("lte/dist/img");
+
+
+            $file->move($tujuan_upload, $namaFile);
+            if (file_exists(public_path("lte/dist/img/" . $namaFile))) {
+                $upload = "ok";
+                // add to table
+                $data = new kategori;
+                $data->gambar = $namaFile;
+                $data->nama_kategori = $request->nama_kategori;
+                $data->deskripsi = $request->deskripsi_kategori;
+                $data->save();
+            }
+        }
+        echo $upload;
     }
 
     /**
@@ -74,11 +95,38 @@ class kategoriAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = kategori::find($id);
-        $data->nama_kategori = $request->nama_kategori;
-        $data->save();
+        $upload = 'err';
+        if (!empty($request->file('file'))) {
 
-        return redirect('/admin/kategori-tari');
+            // menyimpan data file yang diupload ke variabel $file
+            $file = $request->file('file');
+
+            // nama file
+            $namaFile = 'img_' . date('dmYhis') . '.' . $file->getClientOriginalExtension();
+
+            // File upload configuration 
+            $tujuan_upload = public_path("lte/dist/img");
+
+
+            $file->move($tujuan_upload, $namaFile);
+            if (file_exists(public_path("lte/dist/img/" . $namaFile))) {
+                $upload = "ok";
+                // add to table
+                $data = kategori::find($id);
+                File::delete(public_path("lte/dist/img/" . $data->gambar));
+                $data->gambar = $namaFile;
+                $data->nama_kategori = $request->nama_kategori;
+                $data->deskripsi = $request->deskripsi_kategori;
+                $data->save();
+            }
+        } else {
+            $upload = "ok_tb_only";
+            $data = kategori::find($id);
+            $data->nama_kategori = $request->nama_kategori;
+            $data->deskripsi = $request->deskripsi_kategori;
+            $data->save();
+        }
+        return $upload;
     }
 
     /**

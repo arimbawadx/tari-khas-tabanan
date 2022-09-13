@@ -62,6 +62,10 @@
                                                     <input required autocomplete="off" type="text" class="form-control @error('pemilik_sanggar') is-invalid @enderror" id="pemilik_sanggar" name="pemilik_sanggar" placeholder="Masukan Pemilik Sanggar">
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="no_telp">No Telp</label>
+                                                    <input required autocomplete="off" type="number" class="form-control @error('no_telp') is-invalid @enderror" id="no_telp" name="no_telp" placeholder="Masukan No Telp Sanggar">
+                                                </div>
+                                                <div class="form-group">
                                                     <label for="tahun_berdiri">Tahun Berdiri</label>
                                                     <input required autocomplete="off" type="number" class="form-control @error('tahun_berdiri') is-invalid @enderror yearpicker" id="tahun_berdiri" name="tahun_berdiri" placeholder="Masukan Tahun Berdiri">
                                                 </div>
@@ -94,10 +98,12 @@
                                             <th class="w-auto">ID Sanggar</th>
                                             <th>Nama Sanggar</th>
                                             <th>Pemilik</th>
+                                            <th>No Telp</th>
                                             <th>Tahun Berdiri</th>
                                             <th>ALamat</th>
                                             <th>Titik Kordinat</th>
                                             <th class="th-lg">Deskripsi</th>
+                                            <th>File</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -107,10 +113,16 @@
                                             <td>{{$d->id}}</td>
                                             <td>{{$d->nama_sanggar}}</td>
                                             <td>{{$d->pemilik}}</td>
+                                            <td>{{$d->no_telp}}</td>
                                             <td>{{$d->tahun_berdiri}}</td>
                                             <td>{{$d->alamat}}</td>
                                             <td>{{$d->titik_kordinat}}</td>
                                             <td>{{$d->deskripsi}}</td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalViewDataFoto{{$d->id}}">
+                                                    <i class="fa fa-image"></i><span></span>
+                                                </button>
+                                            </td>
                                             <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataSanggar{{$d->id}}">
                                                     <i class="fa fa-pen"></i><span></span>
                                                 </button>
@@ -119,6 +131,32 @@
                                                 </button>
                                             </td>
                                         </tr>
+
+                                        <!-- The Modal View data Foto-->
+                                        <div class="modal" id="myModalViewDataFoto{{$d->id}}">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Data Foto<br>
+                                                            <p class="text-sm">{{$d->logo}}</p>
+                                                        </h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <img src="{{asset('lte/dist/logo/'.$d->logo)}}" width="100%">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
 
                                         <!-- The Modal Ubah data sanggar-->
                                         <div class="modal" id="myModalUbahDataSanggar{{$d->id}}">
@@ -135,7 +173,7 @@
 
                                                     <!-- Modal body -->
                                                     <div class="modal-body">
-                                                        <form class="uploadFormFotoUbah" method="post" enctype="multipart/form-data" foto-id="{{$d->id}}">
+                                                        <form class="." method="post" enctype="multipart/form-data" foto-id="{{$d->id}}">
                                                             {{csrf_field()}}
                                                             <div class="progress">
                                                                 <div class="progress-bar" role="progressbar"></div>
@@ -154,6 +192,10 @@
                                                             <div class="form-group">
                                                                 <label for="pemilik_sanggar">Pemilik</label>
                                                                 <input required autocomplete="off" type="text" class="form-control @error('pemilik_sanggar') is-invalid @enderror" id="pemilik_sanggar" name="pemilik_sanggar" value="{{$d->pemilik}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="no_telp">No Telp</label>
+                                                                <input required autocomplete="off" type="number" class="form-control @error('no_telp') is-invalid @enderror" id="no_telp" name="no_telp" value="{{$d->no_telp}}">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="tahun_berdiri">Tahun Berdiri</label>
@@ -256,7 +298,7 @@
         // Ubah 
         var ajaxCallUbah;
         $(".progress").hide();
-        $(".uploadFormFotoUbah").on('submit', function(e) {
+        $("..").on('submit', function(e) {
             var foto_id = $(this).attr('foto-id');
             $(".progress").show();
             e.preventDefault();
@@ -291,7 +333,7 @@
                 },
                 success: function(resp) {
                     if (resp == 'ok') {
-                        $('#uploadFormFotoUbah')[0].reset();
+                        $('.uploadFormFotoUbah')[0].reset();
                         $('.uploadStatusUbah').html('<p style="color:#28A74B;">File has uploaded successfully!</p>');
                         $('.cancelUploadUbah').hide();
                         window.location.reload();

@@ -58,6 +58,7 @@ class sanggarAdminController extends Controller
                 $data->logo = $namaFile;
                 $data->nama_sanggar = $request->nama_sanggar;
                 $data->pemilik = $request->pemilik_sanggar;
+                $data->no_telp = $request->no_telp;
                 $data->tahun_berdiri = $request->tahun_berdiri;
                 $data->alamat = $request->alamat_sanggar;
                 $data->titik_kordinat = $request->titik_kordinat;
@@ -121,6 +122,7 @@ class sanggarAdminController extends Controller
                 $data->logo = $namaFile;
                 $data->nama_sanggar = $request->nama_sanggar;
                 $data->pemilik = $request->pemilik_sanggar;
+                $data->no_telp = $request->no_telp;
                 $data->tahun_berdiri = $request->tahun_berdiri;
                 $data->alamat = $request->alamat_sanggar;
                 $data->titik_kordinat = $request->titik_kordinat;
@@ -132,6 +134,7 @@ class sanggarAdminController extends Controller
             $data = sanggar::find($id);
             $data->nama_sanggar = $request->nama_sanggar;
             $data->pemilik = $request->pemilik_sanggar;
+            $data->no_telp = $request->no_telp;
             $data->tahun_berdiri = $request->tahun_berdiri;
             $data->alamat = $request->alamat_sanggar;
             $data->titik_kordinat = $request->titik_kordinat;

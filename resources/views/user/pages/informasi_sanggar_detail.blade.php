@@ -29,6 +29,11 @@
                                 <td>{{$data->alamat}}</td>
                             </tr>
                             <tr>
+                                <td>No Telepon</td>
+                                <td>:</td>
+                                <td>{{$data->no_telp}}</td>
+                            </tr>
+                            <tr>
                                 <td>Deskripsi</td>
                                 <td>:</td>
                                 <td>{{$data->deskripsi}}</td>
