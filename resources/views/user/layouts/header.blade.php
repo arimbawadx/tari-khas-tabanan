@@ -1,3 +1,47 @@
+<?php
+
+function hari_ini()
+{
+    $hari = date("D");
+
+    switch ($hari) {
+        case 'Sun':
+            $hari_ini = "Minggu";
+            break;
+
+        case 'Mon':
+            $hari_ini = "Senin";
+            break;
+
+        case 'Tue':
+            $hari_ini = "Selasa";
+            break;
+
+        case 'Wed':
+            $hari_ini = "Rabu";
+            break;
+
+        case 'Thu':
+            $hari_ini = "Kamis";
+            break;
+
+        case 'Fri':
+            $hari_ini = "Jumat";
+            break;
+
+        case 'Sat':
+            $hari_ini = "Sabtu";
+            break;
+
+        default:
+            $hari_ini = "Tidak di ketahui";
+            break;
+    }
+    return $hari_ini;
+}
+
+?>
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <ul class="navbar-nav">
@@ -10,7 +54,7 @@
                 </div>
             </li>
         </ul>
-        <small class="text-light">Selasa, 10 Mei 2022</small>
+        <small class="text-light">{{hari_ini()}}, {{date('d F Y');}}</small>
     </nav>
     <div style="background-color: rgba(255, 0, 0, 0.3);" class="container-fluid d-none d-lg-block">
         <div class="row h-100 align-items-center">
