@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSanggarsTable extends Migration
+class CreateSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateSanggarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sanggars', function (Blueprint $table) {
+        Schema::create('settings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama_sanggar');
-            $table->string('pemilik');
-            $table->string('alamat');
-            $table->string('titik_kordinat');
-            $table->longText('deskripsi');
+            $table->string('judul_header');
+            $table->longText('tentang_kami');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateSanggarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sanggars');
+        Schema::dropIfExists('settings');
     }
 }
