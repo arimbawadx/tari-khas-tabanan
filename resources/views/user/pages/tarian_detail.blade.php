@@ -41,7 +41,14 @@
                             <tr>
                                 <td>Pakaian</td>
                                 <td>:</td>
-                                <td>{{$tarian->pakaian}}</td>
+                                <td><?php echo $tarian->pakaian ?></td>
+                            </tr>
+                            @endif
+                            @if($tarian->properti!=null)
+                            <tr>
+                                <td>Properti</td>
+                                <td>:</td>
+                                <td>{{$tarian->properti}}</td>
                             </tr>
                             @endif
                             <tr>

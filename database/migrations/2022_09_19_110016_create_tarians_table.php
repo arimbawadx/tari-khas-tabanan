@@ -22,7 +22,8 @@ class CreateTariansTable extends Migration
             $table->string('tahun_cipta');
             $table->string('jenis_tarian');
             $table->string('jumlah_penari');
-            $table->string('pakaian')->nullable();
+            $table->longText('pakaian')->nullable();
+            $table->longText('properti')->nullable();
             $table->longText('deskripsi');
             $table->longText('sejarah')->nullable();
             $table->timestamps();

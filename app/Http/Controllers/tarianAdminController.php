@@ -48,6 +48,7 @@ class tarianAdminController extends Controller
         $data->jenis_tarian = $jenis_tarian;
         $data->jumlah_penari = $request->jumlah_penari;
         $data->pakaian = $request->pakaian;
+        $data->properti = $request->properti_tarian;
         $data->deskripsi = $request->deskripsi_tarian;
         $data->sejarah = $request->sejarah_tarian;
         $data->save();
@@ -96,6 +97,7 @@ class tarianAdminController extends Controller
         $data->jenis_tarian = $jenis_tarian;
         $data->jumlah_penari = $request->jumlah_penari;
         $data->pakaian = $request->pakaian;
+        $data->properti = $request->properti_tarian;
         $data->deskripsi = $request->deskripsi_tarian;
         $data->sejarah = $request->sejarah_tarian;
         $data->save();

@@ -67,6 +67,20 @@
   <link rel="stylesheet" href="{{ asset('lte/plugins/yearpicker/yearpicker.css') }}">
   <script src="{{ asset('lte/plugins/yearpicker/yearpicker.js') }}" async></script>
 
+  <!-- textarea editor  -->
+  <script src="https://cdn.tiny.cloud/1/kxvm03xqeg5dsq8uzleje6o2sphna2nl2ksvxs20qk3z87nl/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+  <script>
+    tinymce.init({
+      selector: 'textarea#pakaian',
+      skin: 'bootstrap',
+      plugins: 'lists, link, image, media',
+      toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+      menubar: false,
+    });
+  </script>
+  <!-- /textarea editor  -->
+
+
   <!-- Loader CSS https://loading.io/asset/445230 -->
   <style type="text/css">
     div#preloader {

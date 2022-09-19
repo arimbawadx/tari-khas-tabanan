@@ -64,7 +64,17 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="pakaian">Pakaian</label>
-                                                    <textarea class="form-control" class="form-control @error('pakaian') is-invalid @enderror" id="pakaian" name="pakaian" placeholder="Masukan Pakaian Tarian" rows="3"></textarea>
+                                                    <textarea class="form-control" class="form-control @error('pakaian') is-invalid @enderror" id="pakaian" name="pakaian" placeholder="Masukan Pakaian Tarian" rows="3"><ol>
+                                                        <li>Kamen : </li>
+                                                        <li>Angkid : </li>
+                                                        <li>Pending : </li>
+                                                        <li>Badong : </li>
+                                                    </ol>
+                                                </textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="properti_tarian">Properti</label>
+                                                    <textarea required class="form-control" class="form-control @error('properti_tarian') is-invalid @enderror" id="properti_tarian" name="properti_tarian" placeholder="Masukan Properti" rows="3"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="kategori_tari">Kategori</label>
@@ -107,6 +117,7 @@
                                             <th>Jenis Tari</th>
                                             <th>Jumlah Penari</th>
                                             <th>Pakaian</th>
+                                            <th>Properti</th>
                                             <th>Deskripsi</th>
                                             <th>Sejarah</th>
                                             <th width="150px">Aksi</th>
@@ -141,7 +152,8 @@
                                             <td>{{$d->tahun_cipta}}</td>
                                             <td>{{$d->jenis_tarian}}</td>
                                             <td>{{$d->jumlah_penari}} Orang</td>
-                                            <td>{{$d->pakaian}}</td>
+                                            <td><?php echo $d->pakaian ?></td>
+                                            <td>{{$d->properti}}</td>
                                             <td>{{$d->deskripsi}}</td>
                                             <td>{{$d->sejarah}}</td>
                                             <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataTarian{{$d->id}}">
@@ -193,6 +205,10 @@
                                                             <div class="form-group">
                                                                 <label for="pakaian">Pakaian</label>
                                                                 <textarea class="form-control" class="form-control @error('pakaian') is-invalid @enderror" id="pakaian" name="pakaian" rows="3">{{$d->pakaian}}</textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="properti_tarian">Properti</label>
+                                                                <textarea required class="form-control" class="form-control @error('properti_tarian') is-invalid @enderror" id="properti_tarian" name="properti_tarian" rows="3">{{$d->properti}}</textarea>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="kategori_tari">Kategori</label>
