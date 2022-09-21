@@ -173,7 +173,7 @@
 
                                                     <!-- Modal body -->
                                                     <div class="modal-body">
-                                                        <form class="." method="post" enctype="multipart/form-data" foto-id="{{$d->id}}">
+                                                        <form class="uploadFormFotoUbah" method="post" enctype="multipart/form-data" foto-id="{{$d->id}}">
                                                             {{csrf_field()}}
                                                             <div class="progress">
                                                                 <div class="progress-bar" role="progressbar"></div>
@@ -298,7 +298,7 @@
         // Ubah 
         var ajaxCallUbah;
         $(".progress").hide();
-        $("..").on('submit', function(e) {
+        $(".uploadFormFotoUbah").on('submit', function(e) {
             var foto_id = $(this).attr('foto-id');
             $(".progress").show();
             e.preventDefault();
@@ -348,11 +348,11 @@
             });
         });
 
-        $(document).on('click', '#cancelUploadUbah', function(e) {
+        $(document).on('click', '.cancelUploadUbah', function(e) {
             ajaxCallUbah.abort();
             window.location.reload();
             $('.uploadStatusUbah').html('<p style="color:#EA4335;">Upload dibatalkan</p>');
-            $('#cancelUploadUbah').html('<div id="cancelUploadUbah"></div>');
+            $('.cancelUploadUbah').html('<div class="cancelUploadUbah"></div>');
             $(".progress-bar").width('0%');
             $(".progress-bar").html('0%');
         });

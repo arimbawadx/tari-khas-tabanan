@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 20, 2022 at 11:02 AM
+-- Generation Time: Sep 21, 2022 at 07:07 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -35,15 +35,6 @@ CREATE TABLE `kategoris` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `kategoris`
---
-
-INSERT INTO `kategoris` (`id`, `gambar`, `nama_kategori`, `deskripsi`, `created_at`, `updated_at`) VALUES
-(1, 'img_13092022022033.jpg', 'Tari Kreasi', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit, repellendus. Eveniet repellendus hic sint quibusdam facere nemo, aspernatur vero laudantium porro natus nihil harum totam deleniti, eligendi voluptatum error dicta et sit accusantium aperiam? Sint quam, facilis repudiandae suscipit eaque, veritatis, qui vitae maiores itaque tempore inventore explicabo dicta molestias!', '2022-09-12 07:49:26', '2022-09-13 06:42:03'),
-(2, 'img_13092022022135.jpg', 'Tari Tradisional', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit, repellendus. Eveniet repellendus hic sint quibusdam facere nemo, aspernatur vero laudantium porro natus nihil harum totam deleniti, eligendi voluptatum error dicta et sit accusantium aperiam? Sint quam, facilis repudiandae suscipit eaque, veritatis, qui vitae maiores itaque tempore inventore explicabo dicta molestias!', '2022-09-12 07:49:37', '2022-09-13 06:41:39'),
-(3, 'img_13092022022200.jpg', 'Tari Klasik', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit, repellendus. Eveniet repellendus hic sint quibusdam facere nemo, aspernatur vero laudantium porro natus nihil harum totam deleniti, eligendi voluptatum error dicta et sit accusantium aperiam? Sint quam, facilis repudiandae suscipit eaque, veritatis, qui vitae maiores itaque tempore inventore explicabo dicta molestias!', '2022-09-12 07:49:56', '2022-09-13 06:42:14');
 
 -- --------------------------------------------------------
 
@@ -100,15 +91,6 @@ CREATE TABLE `photos` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `photos`
---
-
-INSERT INTO `photos` (`id`, `tarian_id`, `judul_foto`, `file_foto`, `sumber`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Foto 1 Untuk Tarian A', 'foto_12092022035811.JPG', 'test', '2022-09-12 07:58:11', '2022-09-12 07:58:11'),
-(2, 1, 'Foto 2 Untuk Tarian A', 'foto_12092022035839.JPG', 'tests', '2022-09-12 07:58:39', '2022-09-12 07:58:59'),
-(5, NULL, 'Banner 1', 'banner_12092022042606.png', 'sdsadfcf', '2022-09-12 08:26:06', '2022-09-12 08:26:06');
-
 -- --------------------------------------------------------
 
 --
@@ -128,14 +110,6 @@ CREATE TABLE `sanggars` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `sanggars`
---
-
-INSERT INTO `sanggars` (`id`, `logo`, `nama_sanggar`, `pemilik`, `no_telp`, `tahun_berdiri`, `alamat`, `titik_kordinat`, `deskripsi`, `created_at`, `updated_at`) VALUES
-(2, 'logo_12092022065057.jpg', 'Sanggar Tari Putra Ayu', 'I Nyoman Purna', '085847801933', '1993', 'Tabanan', '-8.523029,115.150065', 'sfsf', '2022-09-12 10:50:57', '2022-09-13 05:45:39'),
-(3, 'logo_12092022065339.jpg', 'Sanggar Tari Tantra Dewata', 'Ayu Krisna Dewi', '085847801933', '1993', 'Tabanan', '-8.523029,115.150065', 'asdgjia', '2022-09-12 10:53:39', '2022-09-13 05:45:52');
 
 -- --------------------------------------------------------
 
@@ -181,16 +155,6 @@ CREATE TABLE `tarians` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `tarians`
---
-
-INSERT INTO `tarians` (`id`, `kategori_id`, `nama_tari`, `pencipta_tari`, `penata_tabuh`, `tahun_cipta`, `jenis_tarian`, `jumlah_penari`, `pakaian`, `properti`, `deskripsi`, `sejarah`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Tarian A', 'Pencipta A', 'Penata A', '2005', 'Tari Kreasi', '2', '<ol>\r\n<li>&nbsp;Kamen : kamen yang digunakanj diusj ijsudcf&nbsp; asij</li>\r\n<li>Angkid : Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis optio, inventore et libero quam quisquam quidem, officia tenetur itaque ratione repellendus natus, fugiat corrupti recusandae soluta ipsum corporis dignissimos quas.</li>\r\n<li>Pending : digunakan untuk</li>\r\n<li>Badong : digunakan untuk</li>\r\n</ol>', 'test', 'Deskripsi A', 'Sejarah A', '2022-09-12 07:52:18', '2022-09-19 02:58:42'),
-(2, 1, 'Tarian B', 'Pencipta B', 'Penata B', '1981', 'Tari Kreasi', '4', NULL, NULL, 'Desk B', NULL, '2022-09-12 07:53:08', '2022-09-12 07:53:08'),
-(3, 2, 'Tarian C', 'Pencipta C', 'Penata C', '2017', 'Tari Tradisional', '5', NULL, NULL, 'Desk C', NULL, '2022-09-12 07:53:46', '2022-09-12 07:53:46'),
-(4, 3, 'Tari Bungan Sandat', 'Pencipta D', 'Penatta D', '2017', 'Tari Klasik', '2', 'Pakaian D', NULL, 'Desk D', NULL, '2022-09-12 07:55:31', '2022-09-13 07:38:54');
-
 -- --------------------------------------------------------
 
 --
@@ -228,13 +192,6 @@ CREATE TABLE `videos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `videos`
---
-
-INSERT INTO `videos` (`id`, `tarian_id`, `judul_video`, `file_video`, `sumber`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Video untuk Tarian A', 'video_12092022035715.mp4', 'Sumber A', '2022-09-12 07:57:15', '2022-09-12 07:57:15');
 
 --
 -- Indexes for dumped tables

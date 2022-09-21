@@ -137,7 +137,9 @@ class kategoriAdminController extends Controller
      */
     public function destroy($id)
     {
-        kategori::find($id)->delete();
+        $data = kategori::find($id);
+        File::delete(public_path("lte/dist/img/" . $data->gambar));
+        $data->delete();
         return redirect('/admin/kategori-tari');
     }
 }

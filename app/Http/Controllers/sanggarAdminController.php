@@ -152,7 +152,9 @@ class sanggarAdminController extends Controller
      */
     public function destroy($id)
     {
-        sanggar::find($id)->delete();
+        $data = sanggar::find($id);
+        File::delete(public_path("lte/dist/logo/" . $data->logo));
+        $data->delete();
         return redirect('/admin/data-sanggar');
     }
 }
