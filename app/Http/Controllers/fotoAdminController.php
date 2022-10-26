@@ -16,7 +16,7 @@ class fotoAdminController extends Controller
      */
     public function index()
     {
-        $data = photo::where('tarian_id', !null)->get();
+        $data = photo::whereNotNull('tarian_id')->get();
         $tarians = tarian::all();
         return view('admin.pages.DataFoto', compact('data', 'tarians'));
     }

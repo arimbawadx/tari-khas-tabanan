@@ -22,7 +22,7 @@ class dashboardAdminController extends Controller
         $countDataKategoriTari = kategori::all()->count();
         $countDataTarian = tarian::all()->count();
         $countDataVideo = video::all()->count();
-        $countDataFoto = photo::where('tarian_id', !null)->count();
+        $countDataFoto = photo::whereNotNull('tarian_id')->count();
         return view('admin.pages.Dashboard', compact('countDataSanggar', 'countDataKategoriTari', 'countDataTarian', 'countDataVideo', 'countDataFoto'));
     }
 

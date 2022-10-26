@@ -59,8 +59,8 @@
                                                     <input required autocomplete="off" type="number" class="form-control @error('tahun_cipta') is-invalid @enderror yearpicker" id="tahun_cipta" name="tahun_cipta" placeholder="Masukan Tahun Cipta Tarian">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="jumlah_penari">Jumlah Penari (*Orang)</label>
-                                                    <input required autocomplete="off" type="number" class="form-control @error('jumlah_penari') is-invalid @enderror" id="jumlah_penari" name="jumlah_penari" placeholder="Masukan Jumlah Penari">
+                                                    <label for="jumlah_penari">Jumlah Penari</label>
+                                                    <input required autocomplete="off" type="text" class="form-control @error('jumlah_penari') is-invalid @enderror" id="jumlah_penari" name="jumlah_penari" placeholder="Masukan Jumlah Penari">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="pakaian">Pakaian</label>
@@ -151,7 +151,7 @@
                                             <td>{{$d->penata_tabuh}}</td>
                                             <td>{{$d->tahun_cipta}}</td>
                                             <td>{{$d->jenis_tarian}}</td>
-                                            <td>{{$d->jumlah_penari}} Orang</td>
+                                            <td>{{$d->jumlah_penari}}</td>
                                             <td><?php echo $d->pakaian ?></td>
                                             <td>{{$d->properti}}</td>
                                             <td>{{$d->deskripsi}}</td>
@@ -199,8 +199,8 @@
                                                                 <input required autocomplete="off" type="number" class="form-control @error('tahun_cipta') is-invalid @enderror yearpicker" id="tahun_cipta" name="tahun_cipta" value="{{$d->tahun_cipta}}">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="jumlah_penari">Jumlah Penari (*Orang)</label>
-                                                                <input required autocomplete="off" type="number" class="form-control @error('jumlah_penari') is-invalid @enderror" id="jumlah_penari" name="jumlah_penari" value="{{$d->jumlah_penari}}">
+                                                                <label for="jumlah_penari">Jumlah Penari</label>
+                                                                <input required autocomplete="off" type="text" class="form-control @error('jumlah_penari') is-invalid @enderror" id="jumlah_penari" name="jumlah_penari" value="{{$d->jumlah_penari}}">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="pakaian">Pakaian</label>

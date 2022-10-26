@@ -22,4 +22,25 @@
         </div>
     </div>
 </main>
+
+<style>
+    .card-img-top {
+        width: 100%;
+        height: 340px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card-img-top>img {
+        width: 100%;
+        max-width: inherit;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%) scale(1.5);
+        -moz-transform: translate(-50%, -50%) scale(1.5);
+        -o-transform: translate(-50%, -50%) scale(1.5);
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+</style>
 @endsection

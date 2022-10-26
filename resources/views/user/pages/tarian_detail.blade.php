@@ -23,6 +23,11 @@
                                 <td>{{$tarian->pencipta_tari}}</td>
                             </tr>
                             <tr>
+                                <td>Penata Tabuh</td>
+                                <td>:</td>
+                                <td>{{$tarian->penata_tabuh}}</td>
+                            </tr>
+                            <tr>
                                 <td>Tahun Cipta</td>
                                 <td>:</td>
                                 <td>{{$tarian->tahun_cipta}}</td>
@@ -35,7 +40,7 @@
                             <tr>
                                 <td>Jumlah Penari</td>
                                 <td>:</td>
-                                <td>{{$tarian->jumlah_penari}} Orang</td>
+                                <td>{{$tarian->jumlah_penari}}</td>
                             </tr>
                             @if($tarian->pakaian!=null)
                             <tr>
