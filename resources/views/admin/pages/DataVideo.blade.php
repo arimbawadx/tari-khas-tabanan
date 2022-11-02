@@ -148,7 +148,7 @@
                                                                     <source src="{{asset('lte/dist/video/'.$d->file_video)}}" type="video/mp4">
                                                                 </video>
                                                                 @else
-                                                                <iframe width="100%" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                                                                <iframe width="100%" height="315" src="{{$d->link_youtube}}">
                                                                 </iframe>
                                                                 @endif
                                                             </div>
