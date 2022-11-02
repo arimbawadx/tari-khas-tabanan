@@ -85,9 +85,16 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <div class="form-group">
+                                                <!-- <div class="form-group">
                                                     <label for="deskripsi_tarian">Deskripsi</label>
                                                     <textarea required class="form-control" class="form-control @error('deskripsi_tarian') is-invalid @enderror" id="deskripsi_tarian" name="deskripsi_tarian" placeholder="Masukan Deskripsi Tarian" rows="3"></textarea>
+                                                </div> -->
+                                                <div class="form-group">
+                                                    <label for="deskripsi_tarian">Deskripsi</label>
+                                                    <textarea class="form-control" class="form-control @error('deskripsi_tarian') is-invalid @enderror" id="deskripsi_tarian" name="deskripsi_tarian" placeholder="Masukan Deskripsi Tarian" rows="3"><ol>
+                                                        <li></li>
+                                                    </ol>
+                                                </textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="sejarah_tarian">Sejarah</label>
@@ -221,9 +228,16 @@
                                                                     @endforeach
                                                                 </select>
                                                             </div>
-                                                            <div class="form-group">
+                                                            <!-- <div class="form-group">
                                                                 <label for="deskripsi_tarian">Deskripsi</label>
                                                                 <textarea required class="form-control" class="form-control @error('deskripsi_tarian') is-invalid @enderror" id="deskripsi_tarian" name="deskripsi_tarian" rows="3">{{$d->deskripsi}}</textarea>
+                                                            </div> -->
+                                                            <div class="form-group">
+                                                                <label for="deskripsi_tarian">Deskripsi</label>
+                                                                <textarea class="form-control" class="form-control @error('deskripsi_tarian') is-invalid @enderror" id="deskripsi_tarian" name="deskripsi_tarian" placeholder="Masukan Deskripsi Tarian" rows="3"><ol>
+                                                        <li></li>
+                                                    </ol>
+                                                </textarea>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="sejarah_tarian">Sejarah</label>

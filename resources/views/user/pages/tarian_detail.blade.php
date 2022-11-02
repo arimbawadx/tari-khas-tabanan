@@ -59,7 +59,7 @@
                             <tr>
                                 <td>Deskripsi</td>
                                 <td>:</td>
-                                <td>{{$tarian->deskripsi}}</td>
+                                <td><?php echo $tarian->deskripsi ?></td>
                             </tr>
                             @if($tarian->sejarah!=null)
                             <tr>

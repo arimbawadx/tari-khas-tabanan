@@ -64,6 +64,23 @@ class videoAdminController extends Controller
                 $video->sumber = $request->sumber_video;
                 $video->save();
             }
+        } elseif (!empty($request->link_youtube)) {
+            $upload = "ok";
+            // add to table
+            $video = new video;
+            $video->tarian_id = $request->tarians_id;
+            $video->judul_video = $request->judul_video;
+            $video->sumber = $request->sumber_video;
+            // https://www.youtube.com/watch?v=8ep3aV6-G6c
+            // https://youtu.be/i3lzSaHs8qg
+            $link_youtube = explode('/', $request->link_youtube);
+            $link_youtube2 = explode('v=', $request->link_youtube);
+            if ($link_youtube[2] == 'youtu.be') {
+                $video->link_youtube = "https://www.youtube.com/embed/" . $link_youtube[3];
+            } elseif ($link_youtube2[0] == 'https://www.youtube.com/watch?') {
+                $video->link_youtube = "https://www.youtube.com/embed/" . $link_youtube2[1];
+            }
+            $video->save();
         }
         echo $upload;
     }
@@ -124,6 +141,23 @@ class videoAdminController extends Controller
                 $video->sumber = $request->sumber_video;
                 $video->save();
             }
+        } elseif (!empty($request->link_youtube)) {
+            $upload = "ok";
+            // add to table
+            $video = video::find($id);
+            $video->tarian_id = $request->tarians_id;
+            $video->judul_video = $request->judul_video;
+            $video->sumber = $request->sumber_video;
+            // https://www.youtube.com/watch?v=8ep3aV6-G6c
+            // https://youtu.be/i3lzSaHs8qg
+            $link_youtube = explode('/', $request->link_youtube);
+            $link_youtube2 = explode('v=', $request->link_youtube);
+            if ($link_youtube[2] == 'youtu.be') {
+                $video->link_youtube = "https://www.youtube.com/embed/" . $link_youtube[3];
+            } elseif ($link_youtube2[0] == 'https://www.youtube.com/watch?') {
+                $video->link_youtube = "https://www.youtube.com/embed/" . $link_youtube2[1];
+            }
+            $video->save();
         } else {
             $upload = "ok_tb_only";
             $video = video::find($id);

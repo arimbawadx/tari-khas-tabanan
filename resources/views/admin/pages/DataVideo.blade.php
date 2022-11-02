@@ -65,9 +65,22 @@
                                                     <label for="sumber_video">Sumber</label>
                                                     <input required autocomplete="off" type="text" class="form-control @error('sumber_video') is-invalid @enderror" id="sumber_video" name="sumber_video" placeholder="Masukan Sumber Video">
                                                 </div>
-                                                <div class="custom-file my-3">
+                                                <!-- <div class="form-group">
+                                                    <label for="media_video">Media</label>
+                                                    <select required name="media_video" class="form-control @error('media_video') is-invalid @enderror" id="media_video">
+                                                        <option value="">Pilih</option>
+                                                        <option value="upload">File Upload</option>
+                                                        <option value="upload">Link</option>
+                                                    </select>
+                                                </div> -->
+                                                <!-- <div class="custom-file my-3">
                                                     <input accept="video/mp4,video/x-m4v,video/*" required="" name="file" type="file" class="custom-file-input" id="fileInput">
                                                     <label class="custom-file-label" for="customFile">Upload Video</label>
+                                                </div> -->
+
+                                                <div class="form-group">
+                                                    <label for="link_youtube">Link Youtube</label>
+                                                    <input required autocomplete="off" type="url" class="form-control @error('link_youtube') is-invalid @enderror" id="link_youtube" name="link_youtube" placeholder="Masukan Link Youtube">
                                                 </div>
 
                                                 <button type="button" class="btn btn-secondary float-right ml-1" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Kembali</button>
@@ -130,9 +143,14 @@
                                                     <div class="modal-body">
                                                         <div class="row">
                                                             <div class="col-lg-12">
+                                                                @if($d->file_video!=null)
                                                                 <video width="100%" height="100%" controls>
                                                                     <source src="{{asset('lte/dist/video/'.$d->file_video)}}" type="video/mp4">
                                                                 </video>
+                                                                @else
+                                                                <iframe width="100%" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                                                                </iframe>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
@@ -182,9 +200,14 @@
                                                                 <label for="sumber_video">Sumber</label>
                                                                 <input required autocomplete="off" type="text" class="form-control @error('sumber_video') is-invalid @enderror" id="sumber_video" name="sumber_video" value="{{$d->sumber}}">
                                                             </div>
-                                                            <div class="custom-file my-3">
+                                                            <!-- <div class="custom-file my-3">
                                                                 <input accept="video/mp4,video/x-m4v,video/*" name="file" type="file" class="custom-file-input" id="fileInputUbah">
                                                                 <label class="custom-file-label" for="customFile">Upload Ulang Video</label>
+                                                            </div> -->
+
+                                                            <div class="form-group">
+                                                                <label for="link_youtube">Link Youtube</label>
+                                                                <input required autocomplete="off" type="text" class="form-control @error('link_youtube') is-invalid @enderror" id="link_youtube" name="link_youtube" value="{{$d->link_youtube}}">
                                                             </div>
 
                                                             <button type="button" class="btn btn-secondary float-right ml-1" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Kembali</button>

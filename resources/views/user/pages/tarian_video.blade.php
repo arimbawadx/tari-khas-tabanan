@@ -23,9 +23,14 @@
                         @foreach($tarian->video as $i => $v)
                         <div class="row mb-5">
                             <div class="col-lg-12">
+                                @if($v->file_video!=null)
                                 <video width="100%" height="100%" controls>
                                     <source src="{{asset('lte/dist/video/'.$v->file_video)}}" type="video/mp4">
                                 </video>
+                                @else
+                                <iframe width="100%" height="615" src="{{$v->link_youtube}}">
+                                </iframe>
+                                @endif
                             </div>
                         </div>
                         @endforeach
