@@ -266,15 +266,18 @@
                 },
                 error: function() {
                     $('#uploadStatus').html('<p style="color:#EA4335;">File upload failed, please try again.</p>');
+                    Swal.fire('Gagal ditambah', '', 'error');
                 },
                 success: function(resp) {
                     if (resp == 'ok') {
                         $('#uploadFormVideo')[0].reset();
                         $('#uploadStatus').html('<p style="color:#28A74B;">File has uploaded successfully!</p>');
                         $('#cancelUpload').hide();
+                        Swal.fire('Berhasil ditambah', '', 'success');
                         window.location.reload();
                     } else if (resp == 'err') {
                         $('#uploadStatus').html('<p style="color:#EA4335;">Please select a valid file to upload.</p>');
+                        Swal.fire('Gagal ditambah', '', 'error');
                     }
                 }
             });
@@ -325,18 +328,22 @@
                 },
                 error: function() {
                     $('.uploadStatusUbah').html('<p style="color:#EA4335;">File upload failed, please try again.</p>');
+                    Swal.fire('Gagal diubah', '', 'error');
                 },
                 success: function(resp) {
                     if (resp == 'ok') {
                         $('.uploadFormVideoUbah')[0].reset();
                         $('.uploadStatusUbah').html('<p style="color:#28A74B;">File has uploaded successfully!</p>');
                         $('.cancelUploadUbah').hide();
+                        Swal.fire('Berhasil diubah', '', 'success');
                         window.location.reload();
                     } else if (resp == 'err') {
                         $('.uploadStatusUbah').html('<p style="color:#EA4335;">Please select a valid file to upload.</p>');
+                        Swal.fire('Gagal diubah', '', 'error');
                     } else if (resp == 'ok_tb_only') {
                         $('.uploadStatusUbah').html('<p style="color:#28A74B;">Data Berhasil Diperbaharui</p>');
                         $('.cancelUploadUbah').hide();
+                        Swal.fire('Berhasil diubah', '', 'success');
                         window.location.reload();
                     }
                 }

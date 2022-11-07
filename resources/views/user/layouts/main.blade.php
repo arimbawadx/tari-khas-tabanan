@@ -31,7 +31,7 @@
         }
 
         body {
-            background-image: url("{{asset('lte/dist/img/background_opc.jpg')}}");
+            background-image: url("{{asset('lte/dist/img/background_opc2.jpg')}}");
             background-size: 100% 100%;
             background-repeat: no-repeat;
         }
@@ -44,6 +44,9 @@
 
     <!-- konten -->
     @yield('content')
+
+    <!-- footer -->
+    @include('user/layouts/footer')
 
     <!-- Optional JavaScript; choose one of the two! -->
 
