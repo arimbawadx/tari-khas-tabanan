@@ -22,13 +22,14 @@
                         @else
                         <div class="row">
                             <div class="col-lg-12">
+                                <h5 class="sumber_picture">Sumber : {{$tarian->photo[0]->sumber;}}</h5>
                                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                                     <div class="carousel-inner">
                                         @foreach($tarian->photo as $i => $p)
                                         <div class="carousel-item <?php if ($i == 0) : ?> active <?php endif ?>">
                                             <img src="{{asset('lte/dist/foto/'.$p->file_foto)}}" class="d-block w-100">
                                             <div class="carousel-caption d-none d-md-block">
-                                                <h5>Sumber : {{$p->sumber}}</h5>
+                                                <h5 class="sumbers" sumber="{{$p->sumber}}" index-sumber={{$i+1}}>Sumber : {{$p->sumber}}</h5>
                                             </div>
                                         </div>
                                         @endforeach
@@ -50,4 +51,13 @@
             </div>
         </div>
 </main>
+<script>
+    $(document).ready(function() {
+        $('.sumbers').hide();
+        $('#carouselExampleControls').on('slid.bs.carousel', function(e) {
+            var value = $('.active .carousel-caption .sumbers').html();
+            $('.sumber_picture').html('<h5 class="sumber_picture">' + value + '</h5>');
+        });
+    });
+</script>
 @endsection
