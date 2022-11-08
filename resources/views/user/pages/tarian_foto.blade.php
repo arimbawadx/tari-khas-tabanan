@@ -27,6 +27,9 @@
                                         @foreach($tarian->photo as $i => $p)
                                         <div class="carousel-item <?php if ($i == 0) : ?> active <?php endif ?>">
                                             <img src="{{asset('lte/dist/foto/'.$p->file_foto)}}" class="d-block w-100">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>Sumber : {{$p->sumber}}</h5>
+                                            </div>
                                         </div>
                                         @endforeach
                                     </div>
