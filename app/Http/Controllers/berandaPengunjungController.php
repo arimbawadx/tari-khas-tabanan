@@ -16,7 +16,7 @@ class berandaPengunjungController extends Controller
      */
     public function index()
     {
-        $tarians = tarian::latest()->take(3)->get();
+        $tarians = tarian::latest()->take(5)->get();
         $carausels = photo::where('tarian_id', null)->get();
         $setting = setting::first();
         return view('user.pages.beranda', compact('carausels', 'tarians', 'setting'));

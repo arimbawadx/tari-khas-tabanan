@@ -103,4 +103,14 @@ Route::get('/informasi-sanggar/{id}', [sanggarPengunjungController::class, 'show
 Route::get('/kategori-tarian', [kategoriPengunjungController::class, 'index']);
 Route::get('/kategori-tarian/{id}', [kategoriPengunjungController::class, 'show']);
 
+// --------------------------------------------------/Profil Peneliti-----------------------------------------------------------------
+Route::get('/profil-peneliti', function () {
+	return view('user.pages.profil_peneliti');
+});
+
+// --------------------------------------------------/Galeri Penelitian-----------------------------------------------------------------
+Route::get('/galeri-penelitian', function () {
+	return view('user.pages.galeri_penelitian');
+});
+
 // =============================================================End Pengunjung=======================================================

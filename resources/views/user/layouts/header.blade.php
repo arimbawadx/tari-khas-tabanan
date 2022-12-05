@@ -51,6 +51,8 @@ function hari_ini()
                 </svg>
                 <div class="dropdown-menu dropdown-menu-left">
                     <a class="dropdown-item" href="/login"> Login </a>
+                    <a class="dropdown-item" href="/profil-peneliti"> Profil Peneliti </a>
+                    <a class="dropdown-item" href="/galeri-penelitian"> Galeri </a>
                 </div>
             </li>
         </ul>
@@ -73,7 +75,14 @@ function hari_ini()
         </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+
+        @if(request()->is('profil-peneliti'))
+        <a class="navbar-brand" href="#">Profil Peneliti</a>
+        @elseif(request()->is('galeri-penelitian'))
+        <a class="navbar-brand" href="#">Galeri</a>
+        @else
         <a class="navbar-brand d-block d-sm-none" href="#">Tarian Khas Tabanan</a>
+        @endif
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
