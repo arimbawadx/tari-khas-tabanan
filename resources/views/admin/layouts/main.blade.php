@@ -317,11 +317,8 @@
       // end selectpicker
 
       // datatables
-      $('.datatables').DataTable({
-        "columnDefs": [{
-          "targets": 'no-sort',
-          "orderable": false,
-        }]
+      $('.datatables').dataTable({
+        "autoWidth": false,
       });
       // end datatables
 

@@ -92,38 +92,38 @@
                         </div>
                         <div class="row">
                             <div class="col-12 table-responsive">
-                                <table class="table datatables table-hover table-bordered table-striped">
+                                <table class="table table-hover table-bordered table-striped">
                                     <thead class="text-center">
-                                        <tr>
-                                            <th class="w-auto">ID Sanggar</th>
-                                            <th>Nama Sanggar</th>
-                                            <th>Pemilik</th>
-                                            <th>No Telp</th>
-                                            <th>Tahun Berdiri</th>
-                                            <th>ALamat</th>
-                                            <th>Titik Kordinat</th>
-                                            <th class="th-lg">Deskripsi</th>
-                                            <th>File</th>
-                                            <th>Aksi</th>
+                                        <tr class="d-flex">
+                                            <th class="col-1">ID Sanggar</th>
+                                            <th class="col-2">Nama Sanggar</th>
+                                            <th class="col-2">Pemilik</th>
+                                            <th class="col-2">No Telp</th>
+                                            <th class="col-2">Tahun Berdiri</th>
+                                            <th class="col-2">ALamat</th>
+                                            <th class="col-2">Titik Kordinat</th>
+                                            <th class="col-10">Deskripsi</th>
+                                            <th class="col-1">File</th>
+                                            <th class="col-1">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($data as $i => $d)
-                                        <tr>
-                                            <td>{{$d->id}}</td>
-                                            <td>{{$d->nama_sanggar}}</td>
-                                            <td>{{$d->pemilik}}</td>
-                                            <td>{{$d->no_telp}}</td>
-                                            <td>{{$d->tahun_berdiri}}</td>
-                                            <td>{{$d->alamat}}</td>
-                                            <td>{{$d->titik_kordinat}}</td>
-                                            <td>{{$d->deskripsi}}</td>
-                                            <td class="text-center">
+                                        <tr class="d-flex">
+                                            <td class="col-1">{{$d->id}}</td>
+                                            <td class="col-2">{{$d->nama_sanggar}}</td>
+                                            <td class="col-2">{{$d->pemilik}}</td>
+                                            <td class="col-2">{{$d->no_telp}}</td>
+                                            <td class="col-2">{{$d->tahun_berdiri}}</td>
+                                            <td class="col-2">{{$d->alamat}}</td>
+                                            <td class="col-2">{{$d->titik_kordinat}}</td>
+                                            <td class="col-10">{{$d->deskripsi}}</td>
+                                            <td class="col-1 text-center">
                                                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalViewDataFoto{{$d->id}}">
                                                     <i class="fa fa-image"></i><span></span>
                                                 </button>
                                             </td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataSanggar{{$d->id}}">
+                                            <td class="col-1 text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataSanggar{{$d->id}}">
                                                     <i class="fa fa-pen"></i><span></span>
                                                 </button>
                                                 <button sanggar-id="{{$d->id}}" nama-sanggar="{{$d->nama_sanggar}}" class="btn btn-danger delete_sanggar">

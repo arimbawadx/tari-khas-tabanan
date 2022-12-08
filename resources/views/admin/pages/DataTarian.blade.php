@@ -112,22 +112,22 @@
                         </div>
                         <div class="row">
                             <div class="col-12 table-responsive">
-                                <table class="table datatables table-hover table-bordered table-striped">
+                                <table class="table table-hover table-bordered table-striped">
                                     <thead class="text-center">
-                                        <tr>
-                                            <th>ID Tari</th>
-                                            <th>ID Kategori</th>
-                                            <th>Nama Tarian</th>
-                                            <th>Pencipta</th>
-                                            <th>Penata Tabuh</th>
-                                            <th>Tahun Cipta</th>
-                                            <th>Jenis Tari</th>
-                                            <th>Jumlah Penari</th>
-                                            <th>Pakaian</th>
-                                            <th>Properti</th>
-                                            <th>Deskripsi</th>
-                                            <th>Sejarah</th>
-                                            <th width="150px">Aksi</th>
+                                        <tr class="d-flex">
+                                            <th class="col-1">ID Tari</th>
+                                            <th class="col-2">ID Kategori</th>
+                                            <th class="col-2">Nama Tarian</th>
+                                            <th class="col-2">Pencipta</th>
+                                            <th class="col-2">Penata Tabuh</th>
+                                            <th class="col-2">Tahun Cipta</th>
+                                            <th class="col-2">Jenis Tari</th>
+                                            <th class="col-2">Jumlah Penari</th>
+                                            <th class="col-10">Pakaian</th>
+                                            <th class="col-6">Properti</th>
+                                            <th class="col-10">Deskripsi</th>
+                                            <th class="col-1">Sejarah</th>
+                                            <th class="col-1">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -150,20 +150,20 @@
                                         </tr> -->
 
                                         @foreach($data as $i => $d)
-                                        <tr>
-                                            <td>{{$d->id}}</td>
-                                            <td>{{$d->kategori_id}}</td>
-                                            <td>{{$d->nama_tari}}</td>
-                                            <td>{{$d->pencipta_tari}}</td>
-                                            <td>{{$d->penata_tabuh}}</td>
-                                            <td>{{$d->tahun_cipta}}</td>
-                                            <td>{{$d->jenis_tarian}}</td>
-                                            <td>{{$d->jumlah_penari}}</td>
-                                            <td><?php echo $d->pakaian ?></td>
-                                            <td>{{$d->properti}}</td>
-                                            <td><?php echo $d->deskripsi ?></td>
-                                            <td>{{$d->sejarah}}</td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataTarian{{$d->id}}">
+                                        <tr class="d-flex">
+                                            <td class="col-1">{{$d->id}}</td>
+                                            <td class="col-2">{{$d->kategori_id}}</td>
+                                            <td class="col-2">{{$d->nama_tari}}</td>
+                                            <td class="col-2">{{$d->pencipta_tari}}</td>
+                                            <td class="col-2">{{$d->penata_tabuh}}</td>
+                                            <td class="col-2">{{$d->tahun_cipta}}</td>
+                                            <td class="col-2">{{$d->jenis_tarian}}</td>
+                                            <td class="col-2">{{$d->jumlah_penari}}</td>
+                                            <td class="col-10"><?php echo $d->pakaian ?></td>
+                                            <td class="col-6">{{$d->properti}}</td>
+                                            <td class="col-10"><?php echo $d->deskripsi ?></td>
+                                            <td class="col-1">{{$d->sejarah}}</td>
+                                            <td class="col-1 text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataTarian{{$d->id}}">
                                                     <i class="fa fa-pen"></i><span></span>
                                                 </button>
                                                 <button tarian-id="{{$d->id}}" nama-tarian="{{$d->nama_tari}}" class="btn btn-danger delete_tarian">
@@ -234,7 +234,7 @@
                                                             </div> -->
                                                             <div class="form-group">
                                                                 <label for="deskripsi_tarian">Deskripsi</label>
-                                                                <textarea class="form-control" class="form-control @error('deskripsi_tarian') is-invalid @enderror" id="deskripsi_tarian" name="deskripsi_tarian" rows="3">{{$d->deskripsi}}</textarea>
+                                                                <textarea class="form-control" class="form-control @error('deskripsi_tarian') is-invalid @enderror" id="deskripsi_tarian" required name="deskripsi_tarian" rows="3">{{$d->deskripsi}}</textarea>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="sejarah_tarian">Sejarah</label>

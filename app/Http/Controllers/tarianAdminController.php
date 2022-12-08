@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\kategori;
 use App\Models\tarian;
 use Illuminate\Http\Request;
@@ -53,6 +54,7 @@ class tarianAdminController extends Controller
         $data->sejarah = $request->sejarah_tarian;
         $data->save();
 
+        Alert::success('Tarian berhasil tambah');
         return redirect('/admin/tarian');
     }
 
@@ -102,6 +104,7 @@ class tarianAdminController extends Controller
         $data->sejarah = $request->sejarah_tarian;
         $data->save();
 
+        Alert::success('Tarian Berhasil diubah');
         return redirect('/admin/tarian');
     }
 
@@ -114,6 +117,7 @@ class tarianAdminController extends Controller
     public function destroy($id)
     {
         tarian::find($id)->delete();
+        Alert::success('Tarian Berhasil dihapus');
         return redirect('/admin/tarian');
     }
 }
