@@ -161,7 +161,7 @@
                                             <td>{{$d->jumlah_penari}}</td>
                                             <td><?php echo $d->pakaian ?></td>
                                             <td>{{$d->properti}}</td>
-                                            <td>{{$d->deskripsi}}</td>
+                                            <td><?php echo $d->deskripsi ?></td>
                                             <td>{{$d->sejarah}}</td>
                                             <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataTarian{{$d->id}}">
                                                     <i class="fa fa-pen"></i><span></span>
@@ -203,7 +203,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="tahun_cipta">Tahun Cipta</label>
-                                                                <input required autocomplete="off" type="number" class="form-control @error('tahun_cipta') is-invalid @enderror yearpicker" id="tahun_cipta" name="tahun_cipta" value="{{$d->tahun_cipta}}">
+                                                                <input required autocomplete="off" type="number" class="form-control @error('tahun_cipta') is-invalid @enderror" id="tahun_cipta" name="tahun_cipta" value="{{$d->tahun_cipta}}">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="jumlah_penari">Jumlah Penari</label>
@@ -234,10 +234,7 @@
                                                             </div> -->
                                                             <div class="form-group">
                                                                 <label for="deskripsi_tarian">Deskripsi</label>
-                                                                <textarea class="form-control" class="form-control @error('deskripsi_tarian') is-invalid @enderror" id="deskripsi_tarian" name="deskripsi_tarian" placeholder="Masukan Deskripsi Tarian" rows="3"><ol>
-                                                        <li></li>
-                                                    </ol>
-                                                </textarea>
+                                                                <textarea class="form-control" class="form-control @error('deskripsi_tarian') is-invalid @enderror" id="deskripsi_tarian" name="deskripsi_tarian" rows="3">{{$d->deskripsi}}</textarea>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="sejarah_tarian">Sejarah</label>
