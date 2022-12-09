@@ -84,6 +84,13 @@
       toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
       menubar: false,
     });
+    tinymce.init({
+      selector: 'textarea#deskripsi_sanggar',
+      skin: 'bootstrap',
+      plugins: 'lists, link, image, media',
+      toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+      menubar: false,
+    });
   </script>
   <!-- /textarea editor  -->
 

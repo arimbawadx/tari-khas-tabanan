@@ -77,9 +77,14 @@
                                                     <label for="titik_kordinat">Titik Kordinat</label>
                                                     <input required autocomplete="off" type="text" class="form-control @error('titik_kordinat') is-invalid @enderror titik_kordinat" id="titik_kordinat" name="titik_kordinat" placeholder="Masukan Latitude dan Longititude">
                                                 </div>
-                                                <div class="form-group">
+                                                <!-- <div class="form-group">
                                                     <label for="deskripsi_sanggar">Deskripsi</label>
                                                     <input required autocomplete="off" type="text" class="form-control @error('deskripsi_sanggar') is-invalid @enderror" id="deskripsi_sanggar" name="deskripsi_sanggar" placeholder="Masukan Deskripsi Sanggar">
+                                                </div> -->
+
+                                                <div class="form-group">
+                                                    <label for="deskripsi_sanggar">Deskripsi</label>
+                                                    <textarea class="form-control" class="form-control @error('deskripsi_sanggar') is-invalid @enderror" id="deskripsi_sanggar" name="deskripsi_sanggar" placeholder="Masukan Deskripsi Sanggar" rows="3">-</textarea>
                                                 </div>
 
                                                 <button type="button" class="btn btn-secondary float-right ml-1" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Kembali</button>
@@ -92,43 +97,55 @@
                         </div>
                         <div class="row">
                             <div class="col-12 table-responsive">
-                                <table class="table table-hover table-bordered table-striped">
+                                <table class="table datatables table-hover table-bordered table-striped">
                                     <thead class="text-center">
-                                        <tr class="d-flex">
-                                            <th class="col-1">ID Sanggar</th>
-                                            <th class="col-2">Nama Sanggar</th>
-                                            <th class="col-2">Pemilik</th>
-                                            <th class="col-2">No Telp</th>
-                                            <th class="col-2">Tahun Berdiri</th>
-                                            <th class="col-2">ALamat</th>
-                                            <th class="col-2">Titik Kordinat</th>
-                                            <th class="col-10">Deskripsi</th>
-                                            <th class="col-1">File</th>
-                                            <th class="col-1">Aksi</th>
+                                        <tr>
+                                            <th>ID Sanggar</th>
+                                            <th>Nama Sanggar</th>
+                                            <th>Pemilik</th>
+                                            <th>No Telp</th>
+                                            <th>Tahun Berdiri</th>
+                                            <!-- <th>ALamat</th> -->
+                                            <!-- <th>Titik Kordinat</th> -->
+                                            <!-- <th class="col-10">Deskripsi</th> -->
+                                            <th>File</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($data as $i => $d)
-                                        <tr class="d-flex">
-                                            <td class="col-1">{{$d->id}}</td>
-                                            <td class="col-2">{{$d->nama_sanggar}}</td>
-                                            <td class="col-2">{{$d->pemilik}}</td>
-                                            <td class="col-2">{{$d->no_telp}}</td>
-                                            <td class="col-2">{{$d->tahun_berdiri}}</td>
-                                            <td class="col-2">{{$d->alamat}}</td>
-                                            <td class="col-2">{{$d->titik_kordinat}}</td>
-                                            <td class="col-10">{{$d->deskripsi}}</td>
+                                        <tr>
+                                            <td>{{$d->id}}</td>
+                                            <td>{{$d->nama_sanggar}}</td>
+                                            <td>{{$d->pemilik}}</td>
+                                            <td>{{$d->no_telp}}</td>
+                                            <td>{{$d->tahun_berdiri}}</td>
+                                            <!-- <td>{{$d->alamat}}</td> -->
+                                            <!-- <td>{{$d->titik_kordinat}}</td> -->
+                                            <!-- <td class="col-10">{{$d->deskripsi}}</td> -->
                                             <td class="col-1 text-center">
                                                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalViewDataFoto{{$d->id}}">
                                                     <i class="fa fa-image"></i><span></span>
                                                 </button>
                                             </td>
-                                            <td class="col-1 text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataSanggar{{$d->id}}">
-                                                    <i class="fa fa-pen"></i><span></span>
+                                            <td class="col-1 text-center">
+                                                <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
                                                 </button>
-                                                <button sanggar-id="{{$d->id}}" nama-sanggar="{{$d->nama_sanggar}}" class="btn btn-danger delete_sanggar">
-                                                    <i class="fa fa-trash"></i><span></span>
-                                                </button>
+                                                <div class="dropdown-menu text-center">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalViewDetail{{$d->id}}">
+                                                                <i class="fa fa-eye"></i>
+                                                            </button>
+                                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataSanggar{{$d->id}}">
+                                                                <i class="fa fa-pen"></i>
+                                                            </button>
+                                                            <button sanggar-id="{{$d->id}}" nama-sanggar="{{$d->nama_sanggar}}" class="btn btn-danger delete_sanggar">
+                                                                <i class="fa fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
 
@@ -150,6 +167,73 @@
                                                         <div class="row">
                                                             <div class="col-lg-12">
                                                                 <img src="{{asset('lte/dist/logo/'.$d->logo)}}" width="100%">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- The Modal View Detail-->
+                                        <div class="modal fade" data-backdrop="static" data-keyboard="false" id="myModalViewDetail{{$d->id}}">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">{{$d->nama_sanggar}}<br>
+                                                            <p class="text-sm">Detail {{$d->nama_sanggar}}</p>
+                                                        </h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="card mt-2 card-light text-dark">
+                                                                    <div class="card-header text-center">
+                                                                        <img src="{{asset('lte/dist/logo/'.$d->logo)}}" width="250px">
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-5">Pemilik Sanggar</div>
+                                                                            <div class="col-1">:</div>
+                                                                            <div class="col-6">{{$d->pemilik}}</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-5">Tahun Berdiri</div>
+                                                                            <div class="col-1">:</div>
+                                                                            <div class="col-6">{{$d->tahun_berdiri}}</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-5">Lokasi</div>
+                                                                            <div class="col-1">:</div>
+                                                                            <div class="col-6">{{$d->alamat}}</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-5">Titik Kordinat</div>
+                                                                            <div class="col-1">:</div>
+                                                                            <div class="col-6">{{$d->titik_kordinat}}</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-5">No Telepon</div>
+                                                                            <div class="col-1">:</div>
+                                                                            <div class="col-6">{{$d->no_telp}}</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-5">Lokasi</div>
+                                                                            <div class="col-1">:</div>
+                                                                            <div class="col-6">{{$d->alamat}}</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-5">Deskripsi</div>
+                                                                            <div class="col-1">:</div>
+                                                                            <div class="col-6"></div>
+                                                                            <div class="col-12"><?php echo $d->deskripsi ?></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -199,7 +283,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="tahun_berdiri">Tahun Berdiri</label>
-                                                                <input required autocomplete="off" type="number" class="form-control @error('tahun_berdiri') is-invalid @enderror yearpicker" id="tahun_berdiri" name="tahun_berdiri" value="{{$d->tahun_berdiri}}">
+                                                                <input required autocomplete="off" type="number" class="form-control @error('tahun_berdiri') is-invalid @enderror" id="tahun_berdiri" name="tahun_berdiri" value="{{$d->tahun_berdiri}}">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="alamat_sanggar">Alamat </label>
@@ -209,9 +293,14 @@
                                                                 <label for="titik_kordinat">Titik Kordinat</label>
                                                                 <input required autocomplete="off" type="text" class="form-control @error('titik_kordinat') is-invalid @enderror titik_kordinat" id="titik_kordinat" name="titik_kordinat" value="{{$d->titik_kordinat}}">
                                                             </div>
-                                                            <div class="form-group">
+                                                            <!-- <div class="form-group">
                                                                 <label for="deskripsi_sanggar">Deskripsi</label>
                                                                 <input required autocomplete="off" type="text" class="form-control @error('deskripsi_sanggar') is-invalid @enderror" id="deskripsi_sanggar" name="deskripsi_sanggar" value="{{$d->deskripsi}}">
+                                                            </div> -->
+
+                                                            <div class="form-group">
+                                                                <label for="deskripsi_sanggar">Deskripsi</label>
+                                                                <textarea required autocomplete="off" class="form-control @error('deskripsi_sanggar') is-invalid @enderror" id="deskripsi_sanggar" name="deskripsi_sanggar">{{$d->deskripsi}}</textarea>
                                                             </div>
 
                                                             <button type="button" class="btn btn-secondary float-right ml-1" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Kembali</button>

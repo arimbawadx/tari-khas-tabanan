@@ -91,10 +91,7 @@
                                                 </div> -->
                                                 <div class="form-group">
                                                     <label for="deskripsi_tarian">Deskripsi</label>
-                                                    <textarea class="form-control" class="form-control @error('deskripsi_tarian') is-invalid @enderror" id="deskripsi_tarian" name="deskripsi_tarian" placeholder="Masukan Deskripsi Tarian" rows="3"><ol>
-                                                        <li></li>
-                                                    </ol>
-                                                </textarea>
+                                                    <textarea class="form-control" class="form-control @error('deskripsi_tarian') is-invalid @enderror" id="deskripsi_tarian" name="deskripsi_tarian" placeholder="Masukan Deskripsi Tarian" rows="3">-</textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="sejarah_tarian">Sejarah</label>
@@ -112,9 +109,9 @@
                         </div>
                         <div class="row">
                             <div class="col-12 table-responsive">
-                                <table class="table table-hover table-bordered table-striped">
+                                <table class="table datatables table-hover table-bordered table-striped">
                                     <thead class="text-center">
-                                        <tr class="d-flex">
+                                        <tr>
                                             <th class="col-1">ID Tari</th>
                                             <th class="col-2">ID Kategori</th>
                                             <th class="col-2">Nama Tarian</th>
@@ -123,10 +120,10 @@
                                             <th class="col-2">Tahun Cipta</th>
                                             <th class="col-2">Jenis Tari</th>
                                             <th class="col-2">Jumlah Penari</th>
-                                            <th class="col-10">Pakaian</th>
-                                            <th class="col-6">Properti</th>
-                                            <th class="col-10">Deskripsi</th>
-                                            <th class="col-1">Sejarah</th>
+                                            <!-- <th class="col-10">Pakaian</th> -->
+                                            <!-- <th class="col-6">Properti</th> -->
+                                            <!-- <th class="col-10">Deskripsi</th> -->
+                                            <!-- <th class="col-1">Sejarah</th> -->
                                             <th class="col-1">Aksi</th>
                                         </tr>
                                     </thead>
@@ -150,7 +147,7 @@
                                         </tr> -->
 
                                         @foreach($data as $i => $d)
-                                        <tr class="d-flex">
+                                        <tr>
                                             <td class="col-1">{{$d->id}}</td>
                                             <td class="col-2">{{$d->kategori_id}}</td>
                                             <td class="col-2">{{$d->nama_tari}}</td>
@@ -159,18 +156,114 @@
                                             <td class="col-2">{{$d->tahun_cipta}}</td>
                                             <td class="col-2">{{$d->jenis_tarian}}</td>
                                             <td class="col-2">{{$d->jumlah_penari}}</td>
-                                            <td class="col-10"><?php echo $d->pakaian ?></td>
-                                            <td class="col-6">{{$d->properti}}</td>
-                                            <td class="col-10"><?php echo $d->deskripsi ?></td>
-                                            <td class="col-1">{{$d->sejarah}}</td>
-                                            <td class="col-1 text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataTarian{{$d->id}}">
-                                                    <i class="fa fa-pen"></i><span></span>
+                                            <!-- <td class="col-6">{{$d->properti}}</td> -->
+                                            <!-- <td class="col-1">{{$d->sejarah}}</td> -->
+                                            <td class="col-1 text-center">
+                                                <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
                                                 </button>
-                                                <button tarian-id="{{$d->id}}" nama-tarian="{{$d->nama_tari}}" class="btn btn-danger delete_tarian">
-                                                    <i class="fa fa-trash"></i><span></span>
-                                                </button>
+                                                <div class="dropdown-menu text-center">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalViewDetail{{$d->id}}">
+                                                                <i class="fa fa-eye"></i>
+                                                            </button>
+                                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalUbahDataTarian{{$d->id}}">
+                                                                <i class="fa fa-pen"></i><span></span>
+                                                            </button>
+                                                            <button tarian-id="{{$d->id}}" nama-tarian="{{$d->nama_tari}}" class="btn btn-danger delete_tarian">
+                                                                <i class="fa fa-trash"></i><span></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
+
+                                        <!-- The Modal View Detail-->
+                                        <div class="modal fade" data-backdrop="static" data-keyboard="false" id="myModalViewDetail{{$d->id}}">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">{{$d->nama_tari}}<br>
+                                                            <p class="text-sm">Detail {{$d->nama_tari}}</p>
+                                                        </h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="card mt-2 card-light text-dark">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-5">Nama Tarian</div>
+                                                                            <div class="col-1">:</div>
+                                                                            <div class="col-6">{{$d->nama_tari}}</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-5">Pencipta</div>
+                                                                            <div class="col-1">:</div>
+                                                                            <div class="col-6">{{$d->pencipta_tari}}</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-5">Penata Tabuh</div>
+                                                                            <div class="col-1">:</div>
+                                                                            <div class="col-6">{{$d->penata_tabuh}}</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-5">Tahun Cipta</div>
+                                                                            <div class="col-1">:</div>
+                                                                            <div class="col-6">{{$d->tahun_cipta}}</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-5">Jenis Tarian</div>
+                                                                            <div class="col-1">:</div>
+                                                                            <div class="col-6">{{$d->jenis_tarian}}</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-5">Jumlah Penari</div>
+                                                                            <div class="col-1">:</div>
+                                                                            <div class="col-6">{{$d->jumlah_penari}}</div>
+                                                                        </div>
+                                                                        <br><br>
+                                                                        <div class="row">
+                                                                            <div class="col-5">Pakaian</div>
+                                                                            <div class="col-1">:</div>
+                                                                            <div class="col-6"></div>
+                                                                            <div class="col-12"><?php echo $d->pakaian ?></div>
+                                                                        </div>
+                                                                        <br><br>
+                                                                        <div class="row">
+                                                                            <div class="col-5">Properti</div>
+                                                                            <div class="col-1">:</div>
+                                                                            <div class="col-6"></div>
+                                                                            <div class="col-12"><?php echo $d->properti ?></div>
+                                                                        </div>
+                                                                        <br><br>
+                                                                        <div class="row">
+                                                                            <div class="col-5">Deskripsi</div>
+                                                                            <div class="col-1">:</div>
+                                                                            <div class="col-6"></div>
+                                                                            <div class="col-12"><?php echo $d->deskripsi ?></div>
+                                                                        </div>
+                                                                        <br><br>
+                                                                        <div class="row">
+                                                                            <div class="col-5">Sejarah</div>
+                                                                            <div class="col-1">:</div>
+                                                                            <div class="col-6"></div>
+                                                                            <div class="col-12"><?php echo $d->sejarah ?></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <!-- The Modal Ubah data Tarian-->
                                         <div class="modal" id="myModalUbahDataTarian{{$d->id}}">
