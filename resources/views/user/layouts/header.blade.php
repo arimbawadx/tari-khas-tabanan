@@ -75,18 +75,51 @@ function hari_ini()
         </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+        <div class="row h-100 align-items-center justify-content-center">
+            <div class="col-10">
+                @if(request()->is('profil-peneliti'))
+                <div class="row">
+                    <div class="col-12">
+                        <a class="navbar-brand" href="#">Profil Peneliti</a>
+                    </div>
+                </div>
+                @elseif(request()->is('galeri-penelitian'))
+                <div class="row">
+                    <div class="col-12">
+                        <a class="navbar-brand" href="#">Galeri</a>
+                    </div>
+                </div>
+                @else
+                <div class="d-block d-sm-none">
+                    <div class="row">
+                        <div class="col-12">
+                            <a class="navbar-brand" href="#">Tarian Khas Tabanan</a>
+                        </div>
+                    </div>
+                </div>
+                @endif
+                <div class="d-block d-sm-none">
+                    <div class="row">
+                        <div class="col-2">
+                            <img src="{{asset('lte/dist/img/Lambang_Kabupaten_Tabanan.png')}}" width="50px" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img src="{{asset('lte/dist/img/LogoInstiki.png')}}" width="120px" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img src="{{asset('lte/dist/img/LogoWebsite.png')}}" width="90px" alt="">
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+                </div>
+            </div>
 
-        @if(request()->is('profil-peneliti'))
-        <a class="navbar-brand" href="#">Profil Peneliti</a>
-        @elseif(request()->is('galeri-penelitian'))
-        <a class="navbar-brand" href="#">Galeri</a>
-        @else
-        <a class="navbar-brand d-block d-sm-none" href="#">Tarian Khas Tabanan</a>
-        @endif
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <div class="col-2">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </div>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
