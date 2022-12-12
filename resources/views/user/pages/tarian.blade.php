@@ -30,7 +30,7 @@
                                 <div class="col-5">{{$tarian->jenis_tarian}}</div>
                             </div>
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-md-6 col-12">
                                     <a href="/tarian/{{$tarian->id}}" class="btn btn-danger btn-sm">Detail</a>
                                     <a href="/tarian/foto/{{$tarian->id}}" class="btn btn-danger btn-sm">Foto</a>
                                     <a href="/tarian/video/{{$tarian->id}}" class="btn btn-danger btn-sm">Video</a>

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\kategori;
+use App\Models\photo;
 use App\Models\tarian;
+use App\Models\video;
 use Illuminate\Http\Request;
 
 class tarianAdminController extends Controller
@@ -117,6 +119,8 @@ class tarianAdminController extends Controller
     public function destroy($id)
     {
         tarian::find($id)->delete();
+        photo::where('tarian_id', $id)->delete();
+        video::where('tarian_id', $id)->delete();
         Alert::success('Tarian Berhasil dihapus');
         return redirect('/admin/tarian');
     }
