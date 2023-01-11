@@ -55,7 +55,8 @@
 $kordinat = "-8.55162, 115.369"; ?>
 <script>
     var kordinat = [<?= $data->titik_kordinat ?>];
-    console.log(kordinat);
+    var nama_sanggar = '<?= $data->nama_sanggar ?>';
+    // console.log(kordinat);
     // lefleat
     var map = L.map('map').setView(kordinat, 15);
 
@@ -65,11 +66,12 @@ $kordinat = "-8.55162, 115.369"; ?>
     }).addTo(map);
 
     var marker = L.marker(kordinat).addTo(map)
-        .bindPopup('<b>Sanggar Tari Putra Ayu</b>').openPopup();
+        .bindPopup('<b>' + nama_sanggar + '</b>').openPopup();
 
     function onMapClick(e) {
         if (confirm('Buka dengan Google Maps?')) {
-            window.open('https://maps.google.com/?q=' + kordinat, '_blank');
+            // window.open('https://maps.google.com/?q=' + kordinat, '_blank');
+            window.open('https://www.google.com/maps/search/?api=1&query=' + kordinat, '_blank');
         }
     }
     marker.on('click', onMapClick);
