@@ -157,6 +157,16 @@ function hari_ini()
                     </div>
                 </li>
 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Download
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/download/data-sanggar">Data Sanggar</a>
+                        <a class="dropdown-item" href="/download/data-tarian">Data Tarian</a>
+                    </div>
+                </li>
+
             </ul>
             <form class="form-inline my-2 my-lg-0" method="get" action="tarian">
                 <input class="form-control mr-sm-2" type="text" autocomplete="off" placeholder="Cari" name="s" aria-label="Search">

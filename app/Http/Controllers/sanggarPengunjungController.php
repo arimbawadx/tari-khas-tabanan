@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\sanggar;
 use Illuminate\Http\Request;
+use App\Exports\SanggarExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class sanggarPengunjungController extends Controller
 {
@@ -83,5 +85,10 @@ class sanggarPengunjungController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function export()
+    {
+        return Excel::download(new SanggarExport, 'data_sanggar.xlsx');
     }
 }

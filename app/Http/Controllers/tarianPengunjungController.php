@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\tarian;
 use Illuminate\Http\Request;
+use App\Exports\TarianExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class tarianPengunjungController extends Controller
 {
@@ -117,5 +119,10 @@ class tarianPengunjungController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function export()
+    {
+        return Excel::download(new TarianExport, 'data_tarian.xlsx');
     }
 }
