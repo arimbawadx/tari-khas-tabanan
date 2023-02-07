@@ -67,15 +67,25 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="tahun_berdiri">Tahun Berdiri</label>
-                                                    <input required autocomplete="off" type="number" class="form-control @error('tahun_berdiri') is-invalid @enderror yearpicker" id="tahun_berdiri" name="tahun_berdiri" placeholder="Masukan Tahun Berdiri">
+                                                    <input required autocomplete="off" type="number" class="form-control @error('tahun_berdiri') is-invalid @enderror" id="tahun_berdiri" name="tahun_berdiri" placeholder="Masukan Tahun Berdiri">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="alamat_sanggar">Alamat </label>
                                                     <input required autocomplete="off" type="text" class="form-control @error('alamat_sanggar') is-invalid @enderror alamat_sanggar" id="alamat_sanggar" name="alamat_sanggar" placeholder="Masukan Alamat Sanggar">
                                                 </div>
-                                                <div class="form-group">
+                                                <!-- <div class="form-group">
                                                     <label for="titik_kordinat">Titik Kordinat</label>
                                                     <input required autocomplete="off" type="text" class="form-control @error('titik_kordinat') is-invalid @enderror titik_kordinat" id="titik_kordinat" name="titik_kordinat" placeholder="Masukan Latitude dan Longititude">
+                                                </div> -->
+
+                                                <div class="form-group">
+                                                    <label for="lat">Latitude</label>
+                                                    <input required autocomplete="off" type="text" class="form-control @error('lat') is-invalid @enderror lat" id="lat" name="lat" placeholder="Masukan Latitude">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="long">Longitude</label>
+                                                    <input required autocomplete="off" type="text" class="form-control @error('long') is-invalid @enderror long" id="long" name="long" placeholder="Masukan Longititude">
                                                 </div>
                                                 <!-- <div class="form-group">
                                                     <label for="deskripsi_sanggar">Deskripsi</label>
@@ -212,6 +222,16 @@
                                                                             <div class="col-6">{{$d->alamat}}</div>
                                                                         </div>
                                                                         <div class="row">
+                                                                            <div class="col-5">Latitude</div>
+                                                                            <div class="col-1">:</div>
+                                                                            <div class="col-6">{{explode(",",$d->titik_kordinat)[0]}}</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-5">Longitude</div>
+                                                                            <div class="col-1">:</div>
+                                                                            <div class="col-6">{{explode(",",$d->titik_kordinat)[1]}}</div>
+                                                                        </div>
+                                                                        <div class="row">
                                                                             <div class="col-5">Titik Kordinat</div>
                                                                             <div class="col-1">:</div>
                                                                             <div class="col-6">{{$d->titik_kordinat}}</div>
@@ -289,9 +309,17 @@
                                                                 <label for="alamat_sanggar">Alamat </label>
                                                                 <input required autocomplete="off" type="text" class="form-control @error('alamat_sanggar') is-invalid @enderror" id="alamat_sanggar" name="alamat_sanggar" value="{{$d->alamat}}">
                                                             </div>
-                                                            <div class="form-group">
+                                                            <!-- <div class="form-group">
                                                                 <label for="titik_kordinat">Titik Kordinat</label>
                                                                 <input required autocomplete="off" type="text" class="form-control @error('titik_kordinat') is-invalid @enderror titik_kordinat" id="titik_kordinat" name="titik_kordinat" value="{{$d->titik_kordinat}}">
+                                                            </div> -->
+                                                            <div class="form-group">
+                                                                <label for="lat">Latitude</label>
+                                                                <input required autocomplete="off" type="text" class="form-control @error('lat') is-invalid @enderror lat" id="lat" name="lat" value='{{explode(",",$d->titik_kordinat)[0]}}'>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="long">Longitude</label>
+                                                                <input required autocomplete="off" type="text" class="form-control @error('long') is-invalid @enderror long" id="long" name="long" value='{{explode(",",$d->titik_kordinat)[1]}}'>
                                                             </div>
                                                             <!-- <div class="form-group">
                                                                 <label for="deskripsi_sanggar">Deskripsi</label>
@@ -324,7 +352,7 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $(".yearpicker").yearpicker();
+        // $(".yearpicker").yearpicker();
 
         // Tambah
         var ajaxCall;

@@ -61,7 +61,7 @@ class sanggarAdminController extends Controller
                 $data->no_telp = $request->no_telp;
                 $data->tahun_berdiri = $request->tahun_berdiri;
                 $data->alamat = $request->alamat_sanggar;
-                $data->titik_kordinat = $request->titik_kordinat;
+                $data->titik_kordinat = $request->lat . "," . $request->long;
                 $data->deskripsi = $request->deskripsi_sanggar;
                 $data->save();
             }
@@ -125,7 +125,7 @@ class sanggarAdminController extends Controller
                 $data->no_telp = $request->no_telp;
                 $data->tahun_berdiri = $request->tahun_berdiri;
                 $data->alamat = $request->alamat_sanggar;
-                $data->titik_kordinat = $request->titik_kordinat;
+                $data->titik_kordinat = $request->lat . "," . $request->long;
                 $data->deskripsi = $request->deskripsi_sanggar;
                 $data->save();
             }
@@ -137,7 +137,7 @@ class sanggarAdminController extends Controller
             $data->no_telp = $request->no_telp;
             $data->tahun_berdiri = $request->tahun_berdiri;
             $data->alamat = $request->alamat_sanggar;
-            $data->titik_kordinat = $request->titik_kordinat;
+            $data->titik_kordinat = $request->lat . "," . $request->long;
             $data->deskripsi = $request->deskripsi_sanggar;
             $data->save();
         }
