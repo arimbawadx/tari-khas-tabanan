@@ -162,8 +162,9 @@ function hari_ini()
                         Download
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/download/data-sanggar">Data Sanggar</a>
-                        <a class="dropdown-item" href="/download/data-tarian">Data Tarian</a>
+                        <a class="dropdown-item" href="/download-r/data-sanggar">Data Sanggar</a>
+                        <a class="dropdown-item" href="/download-r/data-kategori">Data Kategori Tarian</a>
+                        <a class="dropdown-item" href="/download-r/data-tarian">Data Tarian</a>
                     </div>
                 </li>
 

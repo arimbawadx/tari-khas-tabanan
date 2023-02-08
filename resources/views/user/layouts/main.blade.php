@@ -29,6 +29,10 @@
     <script src="{{ asset('lte/plugins/popper/popper.min.js') }}"></script>
     <script src="{{ asset('lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
+    <!-- datatables -->
+    <script src="{{ asset('lte/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('lte/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
+
     <title>@yield('title')</title>
     <style>
         #more {
@@ -56,6 +60,17 @@
 
 
     <script>
+        // datatables
+        $('.datatables').dataTable({
+            "autoWidth": false,
+            pageLength: 5,
+            lengthMenu: [
+                [5, 10, 20, -1],
+                [5, 10, 20, 'Todos']
+            ]
+        });
+        // end datatables
+
         function readMoreFunc() {
             var dots = document.getElementById("dots");
             var moreText = document.getElementById("more");

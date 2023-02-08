@@ -121,6 +121,12 @@ class tarianPengunjungController extends Controller
         //
     }
 
+    public function export_r()
+    {
+        $data = tarian::all();
+        return view('user.pages.review_download_tarian', compact('data'));
+    }
+
     public function export()
     {
         return Excel::download(new TarianExport, 'data_tarian.xlsx');

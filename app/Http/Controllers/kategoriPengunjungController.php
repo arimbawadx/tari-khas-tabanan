@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\kategori;
 use Illuminate\Http\Request;
+use App\Exports\KategoriExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class kategoriPengunjungController extends Controller
 {
@@ -83,5 +85,16 @@ class kategoriPengunjungController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function export_r()
+    {
+        $data = kategori::all();
+        return view('user.pages.review_download_kategori', compact('data'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new KategoriExport, 'data_kategori_tarian.xlsx');
     }
 }
