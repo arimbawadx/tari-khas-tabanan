@@ -95,19 +95,22 @@ Route::get('/tarian/{id}', [tarianPengunjungController::class, 'show']);
 Route::get('/tarian/foto/{id}', [tarianPengunjungController::class, 'showFoto']);
 Route::get('/tarian/video/{id}', [tarianPengunjungController::class, 'showVideo']);
 Route::get('/download-r/data-tarian', [tarianPengunjungController::class, 'export_r']);
-Route::get('/download/data-tarian', [tarianPengunjungController::class, 'export']);
+Route::get('/download/csv/data-tarian', [tarianPengunjungController::class, 'exportCSV']);
+Route::get('/download/xlsx/data-tarian', [tarianPengunjungController::class, 'exportXLSX']);
 
 // --------------------------------------------------/sanggar-----------------------------------------------------------------
 Route::get('/informasi-sanggar', [sanggarPengunjungController::class, 'index']);
 Route::get('/informasi-sanggar/{id}', [sanggarPengunjungController::class, 'show']);
 Route::get('/download-r/data-sanggar', [sanggarPengunjungController::class, 'export_r']);
-Route::get('/download/data-sanggar', [sanggarPengunjungController::class, 'export']);
+Route::get('/download/csv/data-sanggar', [sanggarPengunjungController::class, 'exportCSV']);
+Route::get('/download/xlsx/data-sanggar', [sanggarPengunjungController::class, 'exportXLSX']);
 
 // --------------------------------------------------/kategori tarian-----------------------------------------------------------------
 Route::get('/kategori-tarian', [kategoriPengunjungController::class, 'index']);
 Route::get('/kategori-tarian/{id}', [kategoriPengunjungController::class, 'show']);
 Route::get('/download-r/data-kategori', [kategoriPengunjungController::class, 'export_r']);
-Route::get('/download/data-kategori', [kategoriPengunjungController::class, 'export']);
+Route::get('/download/csv/data-kategori', [kategoriPengunjungController::class, 'exportCSV']);
+Route::get('/download/xlsx/data-kategori', [kategoriPengunjungController::class, 'exportXLSX']);
 
 // --------------------------------------------------/Profil Peneliti-----------------------------------------------------------------
 Route::get('/profil-peneliti', function () {

@@ -6,9 +6,20 @@
     <div class="container my-3">
         <div class="row" style="background-color: rgba(255, 255, 255, 0.7);">
             <div class="col-12 mt-3 table-responsive">
-                <a href="/download/data-tarian" class="btn btn-success btn-sm mb-3 float-right">
-                    Download
-                </a>
+                <button class="btn btn-success btn-sm dropdown-toggle float-right" data-toggle="dropdown" aria-haspopup="true">Download
+                </button>
+                <div class="dropdown-menu text-center">
+                    <div class="row">
+                        <div class="col-12">
+                            <a href="/download/csv/data-tarian" class="btn btn-success btn-sm mb-3">
+                                CSV
+                            </a>
+                            <a href="/download/xlsx/data-tarian" class="btn btn-success btn-sm mb-3">
+                                Excel
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 <table class="table datatables table-hover table-bordered table-striped">
                     <thead class="text-center">
                         <tr>

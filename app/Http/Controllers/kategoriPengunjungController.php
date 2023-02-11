@@ -93,7 +93,12 @@ class kategoriPengunjungController extends Controller
         return view('user.pages.review_download_kategori', compact('data'));
     }
 
-    public function export()
+    public function exportCSV()
+    {
+        return Excel::download(new KategoriExport, 'data_kategori_tarian.csv');
+    }
+
+    public function exportXLSX()
     {
         return Excel::download(new KategoriExport, 'data_kategori_tarian.xlsx');
     }

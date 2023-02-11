@@ -93,7 +93,12 @@ class sanggarPengunjungController extends Controller
         return view('user.pages.review_download_sanggar', compact('data'));
     }
 
-    public function export()
+    public function exportCSV()
+    {
+        return Excel::download(new SanggarExport, 'data_sanggar.csv');
+    }
+
+    public function exportXLSX()
     {
         return Excel::download(new SanggarExport, 'data_sanggar.xlsx');
     }

@@ -127,7 +127,12 @@ class tarianPengunjungController extends Controller
         return view('user.pages.review_download_tarian', compact('data'));
     }
 
-    public function export()
+    public function exportCSV()
+    {
+        return Excel::download(new TarianExport, 'data_tarian.csv');
+    }
+
+    public function exportXLSX()
     {
         return Excel::download(new TarianExport, 'data_tarian.xlsx');
     }
